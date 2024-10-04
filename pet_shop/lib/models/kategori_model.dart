@@ -21,7 +21,7 @@ class ButtonKategori extends StatelessWidget {
         padding: const EdgeInsets.all(14.0), // Padding kiri 16
         child: Text(
           label,
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 19),
         ), // Menampilkan teks
       ),
     );
