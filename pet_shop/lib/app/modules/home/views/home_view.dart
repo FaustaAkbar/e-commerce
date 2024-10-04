@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pet_shop/models/kategori_model.dart';
+import 'package:pet_shop/widget/kategori_model.dart';
 
 import '../controllers/home_controller.dart';
 
