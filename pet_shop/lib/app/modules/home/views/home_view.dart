@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pet_shop/models/kategori_model.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -9,6 +10,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(236, 255, 255, 255),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 249, 249, 249),
         toolbarHeight: 100,
@@ -26,7 +28,7 @@ class HomeView extends GetView<HomeController> {
               width: 5,
             ),
             Text(
-              'Pet Shop',
+              'Pet Shope',
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 20,
@@ -38,29 +40,63 @@ class HomeView extends GetView<HomeController> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search for product..',
-                  border: InputBorder.none,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide.none,
+              Container(
+                padding: EdgeInsets.all(16),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search for product..',
+                    border: InputBorder.none,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(
+                          width: 2.5,
+                          color: const Color.fromARGB(255, 111, 79, 201)),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey.shade100,
+                    suffix: Icon(Icons.search),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(
-                        width: 2.5,
-                        color: const Color.fromARGB(255, 111, 79, 201)),
-                  ),
-                  filled: true,
-                  fillColor: Colors.grey.shade100,
-                  suffix: Icon(Icons.search),
                 ),
               ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ButtonKategori(onPressed: () {}, label: "All"),
+                    SizedBox(
+                      width: 3,
+                    ),
+                    ButtonKategori(onPressed: () {}, label: "Dogs"),
+                    SizedBox(
+                      width: 3,
+                    ),
+                    ButtonKategori(onPressed: () {}, label: "Cats"),
+                    SizedBox(
+                      width: 3,
+                    ),
+                    ButtonKategori(onPressed: () {}, label: "Fish"),
+                    SizedBox(
+                      width: 3,
+                    ),
+                    ButtonKategori(onPressed: () {}, label: "Birds"),
+                    SizedBox(
+                      width: 3,
+                    ),
+                    ButtonKategori(onPressed: () {}, label: "Reptile"),
+                    SizedBox(
+                      width: 3,
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
