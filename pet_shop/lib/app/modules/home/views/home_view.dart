@@ -28,7 +28,7 @@ class HomeView extends GetView<HomeController> {
               width: 5,
             ),
             Text(
-              'Pet Shope',
+              'Pet Shop',
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 20,
