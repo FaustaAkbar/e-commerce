@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:pet_shop/widget/color_palete.dart';
 import 'package:get/get.dart';
 import 'package:pet_shop/widget/kategori_model.dart';
 
@@ -46,23 +46,28 @@ class HomeView extends GetView<HomeController> {
               Container(
                 padding: EdgeInsets.all(16),
                 child: TextField(
+                  cursorHeight: 35,
+                  textAlignVertical: TextAlignVertical.center,
                   decoration: InputDecoration(
-                    hintText: 'Search for product..',
-                    border: InputBorder.none,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          width: 2.5,
-                          color: const Color.fromARGB(255, 111, 79, 201)),
-                    ),
-                    filled: true,
-                    fillColor: Colors.grey.shade100,
-                    suffix: Icon(Icons.search),
-                  ),
+                      hintText: 'Search for product..',
+                      hintStyle: TextStyle(
+                        fontSize: 20,
+                      ),
+                      border: InputBorder.none,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide(color: AppColors.primaryColor),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey.shade100,
+                      suffix: Container(
+                        padding: EdgeInsets.all(5),
+                        child: Icon(Icons.search),
+                      )),
                 ),
               ),
               SingleChildScrollView(
