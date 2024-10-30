@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Dash Header</title>
+    <link rel="stylesheet" href="../css/homePage.css" />
+    <script src="../script.js"></script>
+  </head>
+  <body>
+    <!-- Header Navbar -->
+    <header class="app-bar">
+      <div class="logo-container">
+        <img src="../images/ZexOrder.png" alt="" class="logo" />
+      </div>
+      <nav class="nav-links">
+        <a href="#" class="nav-item active">Home</a>
+        <a href="#">Menu</a>
+        <a href="#">Offers</a>
+        <a href="#">Service</a>
+        <a href="#">About Us</a>
+      </nav>
+      <div class="action-items">
+        <button class="search-btn" onclick="toggleSearchBox()">
+          <span class="search-icon">&#128269;</span>
+          <!-- Ikon pencarian -->
+        </button>
+        <div id="search-box" class="search-box" style="display: none">
+          <input type="text" placeholder="Search..." />
+        </div>
+        <img src="../images/profile.png" alt="" class="profile-img" />
+      </div>
+    </header>
+  </body>
+</html>
