@@ -176,6 +176,7 @@ body {
 
 .hero-text h1 span {
   font-weight: bold;
+  color: black;
 }
 
 .hero-text p {
@@ -212,12 +213,6 @@ body {
 
 .btn-order-now:hover {
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 2px 5px rgba(0, 0, 0, 0.12);
-}
-
-.btn-track-order {
-  background-color: white;
-  color: #4caf50;
-  border: 2px solid #4caf50;
 }
 
 .hero-image img {
