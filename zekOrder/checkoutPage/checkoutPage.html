@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopping Cart</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="checkoutPage.css">
 </head>
 <body>
@@ -65,9 +66,33 @@
                 </div>
 
                 <!-- Repeat the item above for as many items as needed -->
-            </div>
-        </div>
+=======
+    <link rel="stylesheet" href="../checkoutPage/checkoutPage.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left side (Cart Items) -->
+      <div class="cart-container">
+        <h1><span>ZEK</span> ORDER.</h1>
+        <hr class="divider" />
+        <p class="section-title">Shopping Item</p>
 
+        <div class="cart-items">
+          <!-- Cart Item Template -->
+          <div class="cart-item">
+            <img src="../images/vermicelli-upma.jpg" alt="Vermicelli Upma" />
+            <p class="item-name">Vermicelli Upma</p>
+            <div class="quantity-controls">
+              <button class="minus">−</button>
+              <span class="quantity">00</span>
+              <button class="plus">+</button>
+>>>>>>> 7878be6db0a01780f2a3f7453dd09adec1602614
+            </div>
+            <p class="price">₹200</p>
+            <button class="delete">🗑️</button>
+          </div>
+
+<<<<<<< HEAD
         <!-- Right side (Checkout Details) -->
         <div class="checkout-container">
             <h2>Card Details</h2>
@@ -91,17 +116,108 @@
                         <input type="text" id="cvv" placeholder="123">
                     </div>
                 </div>
+=======
+          <div class="cart-item">
+            <img src="../images/vermicelli-upma.jpg" alt="Vermicelli Upma" />
+            <p class="item-name">Vermicelli Upma</p>
+            <div class="quantity-controls">
+              <button class="minus">−</button>
+              <span class="quantity">00</span>
+              <button class="plus">+</button>
+            </div>
+            <p class="price">₹200</p>
+            <button class="delete">🗑️</button>
+          </div>
+>>>>>>> 7878be6db0a01780f2a3f7453dd09adec1602614
 
-                <div class="summary">
-                    <p>Subtotal <span id="subtotal">₹1668</span></p>
-                    <p>Shipping (Free Delivery) <span>₹0</span></p>
-                    <p>Total (Tax incl.) <span id="total">₹1672</span></p>
-                </div>
-                <button class="checkout">Checkout</button>
-            </form>
+          <div class="cart-item">
+            <img src="../images/vermicelli-upma.jpg" alt="Vermicelli Upma" />
+            <p class="item-name">Vermicelli Upma</p>
+            <div class="quantity-controls">
+              <button class="minus">−</button>
+              <span class="quantity">00</span>
+              <button class="plus">+</button>
+            </div>
+            <p class="price">₹200</p>
+            <button class="delete">🗑️</button>
+          </div>
+
+          <div class="cart-item">
+            <img src="../images/vermicelli-upma.jpg" alt="Vermicelli Upma" />
+            <p class="item-name">Vermicelli Upma</p>
+            <div class="quantity-controls">
+              <button class="minus">−</button>
+              <span class="quantity">00</span>
+              <button class="plus">+</button>
+            </div>
+            <p class="price">₹200</p>
+            <button class="delete">🗑️</button>
+          </div>
+
+          <!-- Repeat the item above for as many items as needed -->
         </div>
+      </div>
+
+      <!-- Right side (Checkout Details) -->
+      <div class="checkout-container">
+        <h2>Card Details</h2>
+        <form class="card-details">
+          <div class="profile-img">
+            <img src="../images/people.png" alt="Profile Image" />
+          </div>
+          <label for="name">Name on card</label>
+          <input type="text" id="name" placeholder="Name" />
+
+          <label for="card-number">Card Number</label>
+          <input type="text" id="card-number" placeholder="1111 2222 3333 4444" />
+
+          <div class="card-info">
+            <div>
+              <label for="expiry">Expiration date</label>
+              <input type="text" id="expiry" placeholder="mm/yy" />
+            </div>
+            <div>
+              <label for="cvv">CVV</label>
+              <input type="text" id="cvv" placeholder="123" />
+            </div>
+          </div>
+
+          <div class="summary">
+            <p>Subtotal <span id="subtotal">₹1668</span></p>
+            <p>Shipping (Free Delivery) <span>₹0</span></p>
+            <p>Total (Tax incl.) <span id="total">₹1672</span></p>
+          </div>
+          <button class="checkout">Checkout</button>
+        </form>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div id="paymentModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Pilih Metode Pembayaran</h2>
+        <div class="payment-options">
+          <div class="payment-method">
+            <img src="../images/qris.png" alt="QRIS" />
+            <p>QRIS</p>
+          </div>
+          <div class="payment-method">
+            <img src="../images/school.png" alt="Bayar di Kasir" />
+            <p>Bayar di Kasir</p>
+          </div>
+          <div class="payment-method">
+            <img src="../images/debit.png" alt="Debit Card" />
+            <p>Debit Card</p>
+          </div>
+        </div>
+      </div>
     </div>
 
+<<<<<<< HEAD
     <script src="checkoutPage.js"></script>
 </body>
+=======
+    <script src="../checkoutPage/checkoutPage.js"></script>
+  </body>
+>>>>>>> 7878be6db0a01780f2a3f7453dd09adec1602614
 </html>

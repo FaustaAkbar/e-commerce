@@ -7,6 +7,7 @@
 
 body {
   font-family: Arial, sans-serif;
+  margin-bottom: -60px;
 }
 
 header {
@@ -15,6 +16,8 @@ header {
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: fixed;
+  height: 60px;
+  z-index: 1000;
 }
 
 /* Navbar styling */
@@ -141,10 +144,10 @@ header {
   height: auto;
   margin-left: 30px;
 }
-/* Popular dishes section */
+/* Add spacing from navbar */
 .popular-dishes {
   text-align: center;
-  padding: 40px 20px;
+  padding: 90px 20px;
 }
 
 .popular-dishes h2 {
@@ -271,4 +274,32 @@ header {
 
 .social-icons a:hover {
   color: #4caf50;
+}
+
+.add-to-cart {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.add-to-cart:hover {
+  background-color: #45a049;
+}
+
+.add-to-cart {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.add-to-cart:hover {
+  background-color: #45a049;
 }
