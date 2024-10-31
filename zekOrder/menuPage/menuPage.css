@@ -303,3 +303,8 @@ header {
 .add-to-cart:hover {
   background-color: #45a049;
 }
+
+.footer-logo img {
+  height: 15px; /* Adjust the height as needed */
+  width: auto;
+}
