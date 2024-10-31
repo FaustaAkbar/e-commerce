@@ -1,0 +1,216 @@
+body, html {
+    width: 100%;
+    margin: 0;
+    font-family: Arial;
+}
+
+.background {
+    position: absolute;
+}
+
+.login_box {
+    position: absolute;
+    left: 820px;
+    top: 0px;
+    padding-top: 200px;
+    width: 450px;
+    height: 270px;
+}
+
+.logo_startup {
+    position: absolute;
+    padding-left: 120px;
+    top: 80px;
+}
+
+.tulisan_login {
+    font-size: 20px;
+    font-family: Arial;
+    font-weight: bold;
+    position: absolute;
+    left: 80px;
+    top: 220px;
+}
+
+.Google_Login {
+    position: absolute;
+    left: 70px; 
+    top: 280px; 
+    display: flex;
+    align-items: center; 
+}
+
+.logo_google {
+    margin-right: 8px; 
+}
+
+.Google_Login_Button {
+    font-size: 12px;
+    font-weight: bold;
+    width: 190px;
+    height: 53px;
+    background-color: rgba(255, 255, 255, 1);
+    color: black; 
+    border-radius: 15px;
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.25);
+    border: none;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+
+.Google_Login_Button a {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.Facebook_Login {
+    position: absolute;
+    left: 280px; 
+    top: 280px; 
+    display: flex;
+    align-items: center; 
+    margin-left: 10px; 
+}
+
+.logo_facebook {
+    margin-right: 8px; 
+}
+
+.Facebook_Login_Button {
+    font-size: 12px;
+    font-weight: bold;
+    width: 210px; 
+    height: 53px;
+    background-color: rgb(255, 255, 255); 
+    color: rgb(0, 0, 0); 
+    border-radius: 15px;
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.25);
+    border: none;
+    display: flex;
+    align-items: center; 
+    
+}
+
+.username_tag {
+    position: absolute; 
+    left: 50px; 
+    top: 75px; 
+    font-size: 12px; 
+    color: rgba(101, 101, 101, 0.6); 
+    pointer-events: none; 
+}
+
+.username_box {
+    position: relative; 
+    margin-top: 85px; 
+    left: 35px;
+}
+
+.username_box::placeholder {
+    color:  rgba(101, 101, 101, 0.6);
+}
+
+.password_box {
+    position: relative; 
+    top: 225px;
+    right: 40px;
+}
+
+.password_tag { 
+    position: absolute; 
+    top: 215px;
+    right: 405px;
+    font-size: 12px; 
+    color: rgba(101, 101, 101, 0.6); 
+    pointer-events: none; 
+}
+
+
+.password_box::placeholder {
+    color:  rgba(101, 101, 101, 0.6);
+}
+
+
+input[type=text] {
+    font-family: Arial;
+    font-weight:lighter;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    width: 415px;
+    height: 25px;
+    background-color: white;
+    border-radius: 15px;
+    border-width: 0px;
+    padding-left: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.25);
+    border:none;
+    outline:none;
+}
+
+input[type=password] {
+    font-family: Arial;
+    font-weight:lighter;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    width: 415px;
+    height: 25px;
+    background-color: white;
+    border-radius: 17px;
+    border-width: 0px;
+    padding-left: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.25);
+    border:none;
+    outline:none;
+}
+
+
+
+option[disabled] {
+    color:  rgba(101, 101, 101, 0.6);
+}
+
+.sign_in_button{
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    right: 80px;
+    bottom: 80px;
+    width: 430px;
+    height: 63px;
+    background-color: rgba(0, 112, 31, 1) ;
+    color: white;
+    border-radius: 17px;
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.25);
+    border: none;
+    cursor: pointer;
+}
+
+.sign_in_button a{
+    text-decoration: none;
+    color: inherit; 
+    display: block;
+    
+}
+
+.sign_in_button:hover {
+    background-color: rgb(34, 107, 56);
+}
+
+.sign_in_button:active {
+    background-color: rgb(15, 102, 41)
+}
+
+.register {
+    position: absolute;
+    font-size: 12px;
+    bottom: 55px;
+    right: 340px;
+    text-decoration: none;
+}
