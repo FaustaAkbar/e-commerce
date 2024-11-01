@@ -1,4 +1,4 @@
-/* Navbar styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -20,7 +20,7 @@ header {
   z-index: 1000;
 }
 
-/* Navbar styling */
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -28,7 +28,7 @@ header {
   width: 100%;
 }
 
-/* Logo styling and icon positioning */
+
 .logo-container {
   display: flex;
   align-items: center;
@@ -36,18 +36,18 @@ header {
 }
 
 .logo-image {
-  margin-right: 10px; /* Space between logo and bars icon */
+  margin-right: 10px; 
 }
 
 .bars-icon {
-  display: none; /* Hide by default for desktop */
+  display: none; 
   background: none;
   border: none;
   font-size: 1.5em;
   cursor: pointer;
 }
 
-/* Navigation links styling */
+
 .nav-links {
   display: flex;
   list-style: none;
@@ -65,7 +65,7 @@ header {
   color: #4caf50;
 }
 
-/* Profile section styling */
+
 .profile-section {
   display: flex;
   align-items: center;
@@ -73,19 +73,19 @@ header {
   position: relative;
 }
 
-/* Action items styling */
+
 .action-items {
   display: flex;
   align-items: center;
 }
 
-/* Responsive styling */
+
 @media (max-width: 768px) {
   .nav-links {
-    display: none; /* Hide nav-links initially on mobile */
+    display: none; 
     flex-direction: column;
     position: absolute;
-    top: 60px; /* Adjust based on header height */
+    top: 60px;
     left: 0;
     width: 100%;
     background-color: white;
@@ -94,17 +94,17 @@ header {
   }
 
   .nav-links.active {
-    display: flex; /* Show nav-links when active */
+    display: flex; 
   }
 
   .bars-icon {
-    display: block; /* Show bars icon on mobile */
+    display: block;
   }
 }
 
 .search-btn {
   background-color: #4caf50;
-  border: black;
+  border: none;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -131,7 +131,7 @@ header {
   font-size: 14px;
 }
 
-/* Profile picture styling */
+
 .profile-pic {
   width: 30px;
   height: 30px;
@@ -144,35 +144,56 @@ header {
   height: auto;
   margin-left: 30px;
 }
-/* Add spacing from navbar */
-.popular-dishes {
+
+
+.makanan {
   text-align: center;
   padding: 90px 20px;
 }
 
-.popular-dishes h2 {
+.makanan h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-.popular-dishes .highlight {
+.makanan .highlight {
   color: #4caf50;
   font-weight: bold;
 }
 
 .dish-cards {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  overflow-x: auto; 
+  gap: 16px;
+  padding: 16px;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+  width: 100%; 
+  max-width: 1200px; 
+  margin: 0 auto; 
+}
+
+.dish-cards::-webkit-scrollbar {
+  display: none;  
 }
 
 .card {
+  flex: 1 1 200px; 
+  min-width: 200px; 
+  max-width: 300px; 
+  position: relative;
+  overflow: hidden;
   border: 2px dashed #4caf50;
   padding: 20px;
   border-radius: 10px;
-  width: 200px;
   text-align: center;
   background-color: #f0f9f1;
+  transition: transform 0.2s; 
+}
+
+.card:hover {
+  transform: scale(1.05); 
 }
 
 .dish-image {
@@ -210,10 +231,17 @@ header {
   background-color: #4caf50;
   border: none;
   color: white;
-  padding: 5px 10px;
+  padding: 10px; 
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%; 
   cursor: pointer;
-  border-radius: 5px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  font-size: 20px; 
 }
+
 
 .quantity {
   margin: 0 10px;
@@ -226,12 +254,17 @@ header {
   padding: 10px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 25px; 
   width: 100%;
   font-size: 16px;
+  transition: background-color 0.3s;
 }
 
-/* Footer Styles */
+.add-to-cart:hover {
+  background-color: #45a049; 
+}
+
+
 .footer {
   background-color: #e8f9e8;
   padding: 20px;
@@ -276,35 +309,7 @@ header {
   color: #4caf50;
 }
 
-.add-to-cart {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-.add-to-cart:hover {
-  background-color: #45a049;
-}
-
-.add-to-cart {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-.add-to-cart:hover {
-  background-color: #45a049;
-}
-
 .footer-logo img {
-  height: 15px; /* Adjust the height as needed */
+  height: 15px; 
   width: auto;
 }
