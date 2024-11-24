@@ -61,3 +61,40 @@ window.addEventListener('click', function (event) {
     drawer.style.display = 'none';
   }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  const popularCards = document.getElementById('popular-cards');
+
+  // Ambil data dari API
+  fetch('http://127.0.0.1:3000/api/menu')
+    .then((response) => response.json())
+    .then((data) => {
+      // Filter untuk 3 menu terbaik dari kategori Makanan
+      const bestMakanan = data.filter((item) => item.isBest && item.category === 'Makanan').slice(0, 3); // Ambil maksimal 3 item
+
+      // Tampilkan menu ke dalam card
+      bestMakanan.forEach((item) => {
+        const card = createCard(item);
+        popularCards.appendChild(card);
+      });
+    })
+    .catch((error) => console.error('Error fetching menu data:', error));
+});
+
+function createCard(item) {
+  const card = document.createElement('div');
+  card.classList.add('dish-item');
+
+  const imageUrl = item.imageUrl || '/assets/default.png'; // Gambar default jika tidak ada
+
+  card.innerHTML = `
+    <div class="dish-image-wrapper">
+      <img src="${imageUrl}" alt="${item.itemName}">
+    </div>
+    <div class="dish-name">${item.itemName}</div>
+    <a href="/menuPage/menuPage.html" class="order-link">Order Now</a>
+
+  `;
+
+  return card;
+}

@@ -14,7 +14,7 @@
     "description": "Ayam goreng renyah dengan bumbu spesial",
     "price": 20000,
     "category": "Makanan",
-    "imageUrl": "../assets/images/makanan/nasgorTelor.jpeg",
+    "imageUrl": "../assets/images/makanan/ayamGoreng.jpeg",
     "isBest": false
   },
   {
@@ -32,7 +32,7 @@
     "description": "Sayur asem segar dengan bumbu tradisional",
     "price": 8000,
     "category": "Makanan",
-    "imageUrl": "images/logo.png",
+    "imageUrl": "../assets/images/makanan/sayurAsem.jpeg",
     "isBest": false
   },
   {
@@ -41,7 +41,7 @@
     "description": "Ikan bakar dengan bumbu kecap yang lezat",
     "price": 25000,
     "category": "Makanan",
-    "imageUrl": "images/logo.png",
+    "imageUrl": "../assets/images/makanan/ikanBakar.jpeg",
     "isBest": true
   },
   {
@@ -68,7 +68,7 @@
     "description": "Jus alpukat segar dengan tambahan susu cokelat",
     "price": 15000,
     "category": "Minuman",
-    "imageUrl": "images/logo.png",
+    "imageUrl": "../assets/images/minuman/jusAlpukat.jpeg",
     "isBest": true
   },
   {
@@ -86,7 +86,7 @@
     "description": "Minuman soda dengan sirup manis yang menyegarkan",
     "price": 12000,
     "category": "Minuman",
-    "imageUrl": "images/logo.png",
+    "imageUrl": "../assets/images/minuman/sodaGembira.jpeg",
     "isBest": false
   }
 ]

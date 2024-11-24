@@ -18,40 +18,6 @@ function toggleNav() {
   navLinks.classList.toggle('active');
 }
 
-// Seleksi tombol dan input quantity
-document.querySelectorAll('.dish-card').forEach((card) => {
-  const minusBtn = card.querySelector('.quantity-control button:first-child');
-  const plusBtn = card.querySelector('.quantity-control button:last-child');
-  const quantityInput = card.querySelector('.quantity-control input');
-  const addToCartBtn = card.querySelector('.add-to-cart');
-
-  let quantity = 0; // Default quantity
-
-  // Event untuk tombol minus
-  minusBtn.addEventListener('click', () => {
-    if (quantity > 0) {
-      quantity--;
-      quantityInput.value = quantity;
-    }
-  });
-
-  // Event untuk tombol plus
-  plusBtn.addEventListener('click', () => {
-    quantity++;
-    quantityInput.value = quantity;
-  });
-
-  // Event untuk tombol Add to Cart
-  addToCartBtn.addEventListener('click', () => {
-    if (quantity > 0) {
-      alert(`${quantity} item(s) ditambahkan ke keranjang!`);
-      // Logic untuk menambahkan ke keranjang bisa ditambahkan di sini
-    } else {
-      alert('Tambahkan jumlah terlebih dahulu!');
-    }
-  });
-});
-
 document.addEventListener('DOMContentLoaded', function () {
   const navLinks = document.querySelectorAll('.nav-link');
 
@@ -116,17 +82,61 @@ function createCard(item) {
 
   const imageUrl = item.imageUrl || 'default.png'; // Gambar default jika tidak ada
   card.innerHTML = `
-    <img src="${imageUrl}" alt="${item.itemName}">
-    <h3>${item.itemName}</h3>
-    <p>${item.description}</p>
-    <p>Rp <span class="price">${item.price}</span></p>
-    <div class="quantity-control">
-      <button class="minus">-</button>
-      <span class="quantity">0</span>
-      <button class="plus">+</button>
-    </div>
-    <button class="add-to-cart">Add to Cart</button>
+      <img src="${imageUrl}" alt="${item.itemName}">
+      <h3>${item.itemName}</h3>
+      <p>${item.description}</p>
+      <p>Rp <span class="price">${item.price}</span></p>
+      <div class="quantity-control">
+          <button class="minus">-</button>
+          <span class="quantity">0</span>
+          <button class="plus">+</button>
+      </div>
+      <button class="add-to-cart">Add to Cart</button>
   `;
 
+  const quantityElement = card.querySelector('.quantity');
+  let quantity = 0;
+
+  card.querySelector('.plus').addEventListener('click', () => {
+    quantity++;
+    quantityElement.textContent = quantity;
+  });
+
+  card.querySelector('.minus').addEventListener('click', () => {
+    if (quantity > 0) {
+      quantity--;
+      quantityElement.textContent = quantity;
+    }
+  });
+
+  card.querySelector('.add-to-cart').addEventListener('click', () => {
+    if (quantity > 0) {
+      addToCart(item, quantity);
+      alert(`${item.itemName} telah ditambahkan ke keranjang!`);
+      window.location.href = '/checkoutPage/checkoutPage.html'; // Arahkan ke halaman checkout
+    } else {
+      alert('Silakan pilih jumlah produk!');
+    }
+  });
+
   return card;
+}
+
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function updateCart() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function addToCart(item, quantity) {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+
+  if (existingItem) {
+    existingItem.quantity += quantity; // Tambahkan jumlah
+  } else {
+    cart.push({ ...item, quantity }); // Tambahkan item baru ke keranjang
+  }
+
+  localStorage.setItem('cart', JSON.stringify(cart)); // Simpan ke localStorage
 }
