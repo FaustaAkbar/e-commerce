@@ -176,3 +176,42 @@ dishCardsContainer.addEventListener("mousemove", (e) => {
   const walk = (x - startX) * 3;
   dishCardsContainer.scrollLeft = scrollLeft - walk;
 });
+
+// Fungsi untuk mencari kartu yang cocok dengan input pencarian
+function filterCards(searchTerm) {
+  // Gabungkan semua data menjadi satu array
+  const allData = [...DataPopuler, ...DataMakanan, ...DataMinuman];
+  
+  // Filter data berdasarkan nama yang mengandung teks pencarian
+  const filteredData = allData.filter(item => 
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Jika tidak ada hasil, tampilkan pesan
+  if (filteredData.length === 0) {
+    document.getElementById("dish-cards").innerHTML = "<p>Tidak ada hasil ditemukan.</p>";
+    document.getElementById("snacks-cards").innerHTML = "";
+    document.getElementById("regular-cards").innerHTML = "";
+  } else {
+    // Render ulang kartu di semua kategori
+    document.getElementById("deskripsi").innerHTML = 'Hasil Pencarian';
+    renderCards(filteredData, "dish-cards");
+    document.getElementById("snacks-cards").innerHTML = "";
+    document.getElementById("regular-cards").innerHTML = "";
+  }
+}
+
+// Event listener untuk input pencarian
+const searchInput = document.getElementById("search-input");
+searchInput.addEventListener("input", function () {
+  const searchTerm = this.value.trim(); // Ambil input user
+  if (searchTerm) {
+    filterCards(searchTerm); // Panggil fungsi filterCards
+  } else {
+    // Jika kotak pencarian kosong, render ulang semua kartu
+    document.getElementById("deskripsi").innerHTML = 'Hidangan <span class="highlight">Terbaik</span> Kami';
+    renderCards(DataPopuler, "dish-cards");
+    renderCards(DataMakanan, "snacks-cards");
+    renderCards(DataMinuman, "regular-cards");
+  }
+});
