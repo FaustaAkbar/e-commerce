@@ -30,9 +30,9 @@
             <button class="search-btn" onclick="toggleSearchBox()">
               <i class="fas fa-search"></i>
             </button>
-            <div id="search-box" class="search-box" style="display: none">
-              <input type="text" placeholder="Search..." />
-            </div>
+            <div id="search-box" class="search-box">
+              <input type="text" id="search-input" placeholder="Search..." oninput="filterCards()" />
+            </div>            
           </div>
           <img src="../assets/images/profile.png" alt="Profile Image" class="profile-pic" />
         </div>
@@ -52,6 +52,10 @@
       <h2>Menu <span class="highlight">Minuman</span> Kami</h2>
       <div class="dish-cards" id="minuman-cards"></div>
     </section>
+    <section id="search-results" style="display: none;">
+      <h2>Hasil <span class="highlight">Pencarian</span></h2>
+      <div class="dish-cards" id="search-cards"></div>
+    </section>    
   </body>
   <!-- Bottom Header -->
   <footer id class="footer">

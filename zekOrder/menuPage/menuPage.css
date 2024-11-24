@@ -318,3 +318,20 @@ section {
 .footer-right .social-icons a:hover {
   color: #4caf50;
 }
+
+/* Pastikan container utama memiliki minimum tinggi */
+#search-results {
+  min-height: 500px; /* Sesuaikan 200px dengan tinggi header + footer */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Agar teks "Tidak ada menu..." di tengah secara vertikal */
+  align-items: center; /* Agar teks di tengah secara horizontal */
+  text-align: center;
+}
+
+.no-results {
+  font-size: 16px;
+  color: #555;
+  margin-top: 20px;
+}
+

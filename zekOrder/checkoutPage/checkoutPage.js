@@ -36,8 +36,8 @@ document.querySelectorAll('.cart-item').forEach((item) => {
     const tax = subtotal * 0.1; // Calculate 10% tax
     const total = subtotal + tax;
 
-    document.getElementById('subtotal').textContent = `₹${subtotal.toFixed(2)}`;
-    document.getElementById('total').textContent = `₹${total.toFixed(2)}`;
+    document.getElementById('subtotal').textContent = `Rp${subtotal.toFixed(0)}`;
+    document.getElementById('total').textContent = `Rp${total.toFixed(0)}`;
   }
 });
 

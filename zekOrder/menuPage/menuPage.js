@@ -130,3 +130,66 @@ function createCard(item) {
 
   return card;
 }
+
+let cachedSearchResults = []; // Simpan hasil pencarian terakhir
+
+function filterCards() {
+  const searchInput = document.getElementById('search-input').value.toLowerCase();
+  const searchResultsDiv = document.getElementById('search-results');
+  const searchCardsDiv = document.getElementById('search-cards');
+  const categorySections = ['popular', 'makanan', 'minuman'];
+
+  // Tampilkan kembali semua kategori jika input kosong
+  if (searchInput === '') {
+    searchResultsDiv.style.display = 'none';
+    categorySections.forEach((id) => {
+      document.getElementById(`${id}-cards`).parentElement.style.display = 'block';
+    });
+    cachedSearchResults = []; // Kosongkan cache
+    return;
+  }
+
+  // Ambil data asli dari menu API
+  fetch('http://127.0.0.1:3000/api/menu')
+    .then((response) => response.json())
+    .then((data) => {
+      // Filter data berdasarkan input pencarian
+      const filteredItems = data.filter((item) => {
+        const itemName = item.itemName.toLowerCase();
+        const itemDescription = item.description.toLowerCase();
+        return (
+          searchInput &&
+          (itemName.includes(searchInput) || itemDescription.includes(searchInput))
+        );
+      });
+
+      // Cek apakah hasil pencarian berubah
+      if (JSON.stringify(filteredItems) !== JSON.stringify(cachedSearchResults)) {
+        cachedSearchResults = filteredItems; // Perbarui cache hasil pencarian
+
+        // Kosongkan hanya elemen yang perlu dihapus
+        searchCardsDiv.innerHTML = ''; // Bersihkan kartu sebelumnya
+
+        // Tampilkan kartu yang cocok
+        if (filteredItems.length > 0) {
+          filteredItems.forEach((item) => {
+            const card = createCard(item); // Gunakan fungsi createCard untuk membuat kartu
+            searchCardsDiv.appendChild(card);
+          });
+
+          searchResultsDiv.style.display = 'block'; // Tampilkan hasil pencarian
+          categorySections.forEach((id) => {
+            document.getElementById(`${id}-cards`).parentElement.style.display = 'none'; // Sembunyikan kategori
+          });
+        } else {
+          // Jika tidak ada hasil
+          searchCardsDiv.innerHTML = '<p class="no-results">Tidak ada menu yang sesuai dengan pencarian.</p>';
+          searchResultsDiv.style.display = 'block';
+          categorySections.forEach((id) => {
+            document.getElementById(`${id}-cards`).parentElement.style.display = 'none'; // Sembunyikan kategori
+          });
+        }
+      }
+    })
+    .catch((error) => console.error('Error fetching menu data:', error));
+}
