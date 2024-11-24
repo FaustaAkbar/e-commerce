@@ -19,14 +19,14 @@
             <i class="fas fa-bars"></i>
           </button>
           <!-- Zek Order logo -->
-          <img src="../images/ZexOrder.png" alt="Zek Order Logo" class="logo-image" />
+          <img src="../assets/images/ZexOrder.png" alt="Zek Order Logo" class="logo-image" />
         </div>
 
         <!-- Navigation Links -->
         <ul class="nav-links" id="nav-links">
-          <li><a href="#" class="nav-link active">Home</a></li>
-          <li><a href="#best-served-section" class="nav-link">Menu</a></li>
-          <li><a href="#about-section" class="nav-link">Tentang Kami</a></li>
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#Menu" class="nav-link">Menu</a></li>
+          <li><a href="#About-Us" class="nav-link">About Us</a></li>
         </ul>
 
         <div class="profile-section">
@@ -38,7 +38,16 @@
               <input type="text" placeholder="Search..." />
             </div>
           </div>
-          <img src="../images/profile.png" alt="Profile Image" class="profile-pic" />
+          <img src="../assets/images/profile.png" alt="Profile Image" class="profile-pic" onclick="toggleProfileDrawer()" />
+
+          <!-- Profile Drawer -->
+          <div id="profile-drawer" class="profile-drawer" style="display: none">
+            <ul>
+              <li><a href="#">Profil</a></li>
+              <li><a href="#">Pengaturan</a></li>
+              <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+          </div>
         </div>
       </nav>
     </header>
@@ -52,38 +61,38 @@
         </div>
       </div>
       <div class="hero-image">
-        <img src="../images/Food.png" alt="Delicious Food" />
+        <img src="../assets/images/Food.png" alt="Delicious Food" />
       </div>
     </section>
 
     <!-- Feature Section -->
     <section class="feature-section">
       <div class="feature">
-        <img src="../images/fastdeliv.png" alt="Fast Delivery Icon" />
+        <img src="../assets/images/fastdeliv.png" alt="Fast Delivery Icon" />
         <h3>Pengiriman Cepat</h3>
         <p>Pengiriman dalam waktu 30 menit</p>
       </div>
       <div class="feature">
-        <img src="../images/fresh.png" alt="Fresh Food Icon" />
+        <img src="../assets/images/fresh.png" alt="Fresh Food Icon" />
         <h3>Makanan Segar</h3>
         <p>Makanan Anda dipastikan 100% segar</p>
       </div>
       <div class="feature">
-        <img src="../images/box.png" alt="Free Delivery Icon" />
+        <img src="../assets/images/box.png" alt="Free Delivery Icon" />
         <h3>Pengiriman Gratis</h3>
         <p>Pengiriman gratis. Tanpa biaya, pesan Sekarang!</p>
       </div>
     </section>
 
     <!-- Best Served Section -->
-    <section id="best-served-section" class="best-served-section">
+    <section id="Menu" class="best-served-section">
       <h2>Hidangan <span class="highlight">Terbaik</span> Warkop Kami</h2>
       <p class="description">Ini Bukan Hanya Tentang Memberikan Anda Makanan Lezat Dari Restoran, Kami Memberikan Anda Pengalaman</p>
       <div class="dish-items">
         <!-- Dish 1 -->
         <div class="dish-item">
           <div class="dish-image-wrapper">
-            <img src="../images/Food.png" alt="Indian Vegetable Pulao" />
+            <img src="../assets/images/Food.png" alt="Indian Vegetable Pulao" />
           </div>
           <p class="dish-name">Indian Vegetable Pulao</p>
           <a href="../checkoutPage/checkoutPage.html" class="order-link">Order Now ></a>
@@ -91,7 +100,7 @@
         <!-- Dish 2 -->
         <div class="dish-item">
           <div class="dish-image-wrapper">
-            <img src="../images/Food.png" alt="Paneer Bhuna Masala" />
+            <img src="../assets/images/Food.png" alt="Paneer Bhuna Masala" />
           </div>
           <p class="dish-name">Paneer Bhuna Masala</p>
           <a href="../checkoutPage/checkoutPage.html" class="order-link">Order Now ></a>
@@ -99,7 +108,7 @@
         <!-- Dish 3 -->
         <div class="dish-item">
           <div class="dish-image-wrapper">
-            <img src="../images/Food.png" alt="Vermicelli Upma" />
+            <img src="../assets/images/Food.png" alt="Vermicelli Upma" />
           </div>
           <p class="dish-name">Vermicelli Upma</p>
           <a href="../checkoutPage/checkoutPage.html" class="order-link">Order Now ></a>
@@ -110,10 +119,10 @@
   </body>
 
   <!-- Footer Section -->
-  <footer id="footer-section">
+  <footer id="About-Us">
     <div class="footer-content">
       <div class="footer-section">
-        <img src="../images/ZexOrder.png" alt="Zek Order Logo" class="logo-image" />
+        <img src="../assets/images/ZexOrder.png" alt="Zek Order Logo" class="logo-image" />
         <p>ZekOrder ©2024 All Rights Reserved</p>
         <p>By - TipuTolo Team</p>
         <h4>Follow Us On</h4>
@@ -128,7 +137,7 @@
       <div class="footer-section">
         <h3>Menu</h3>
         <a href="#home">Home</a>
-        <a href="#">Menu</a>
+        <a href="#Menu">Menu</a>
         <a href="#footer-section">Tentang kami</a>
       </div>
       <div class="footer-section">

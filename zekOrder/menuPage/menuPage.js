@@ -1,16 +1,15 @@
-// Fungsi untuk menampilkan atau menyembunyikan kotak pencarian
 function toggleSearchBox() {
   const searchBox = document.getElementById('search-box');
   if (searchBox.style.display === 'none' || searchBox.style.display === '') {
-      searchBox.style.display = 'block';
-      setTimeout(() => {
-          searchBox.style.opacity = 1;
-      }, 200);
+    searchBox.style.display = 'block';
+    setTimeout(() => {
+      searchBox.style.opacity = 1;
+    }, 200);
   } else {
-      searchBox.style.opacity = 0;
-      setTimeout(() => {
-          searchBox.style.display = 'none';
-      }, 300);
+    searchBox.style.opacity = 0;
+    setTimeout(() => {
+      searchBox.style.display = 'none';
+    }, 300);
   }
 }
 
@@ -19,160 +18,115 @@ function toggleNav() {
   navLinks.classList.toggle('active');
 }
 
+// Seleksi tombol dan input quantity
+document.querySelectorAll('.dish-card').forEach((card) => {
+  const minusBtn = card.querySelector('.quantity-control button:first-child');
+  const plusBtn = card.querySelector('.quantity-control button:last-child');
+  const quantityInput = card.querySelector('.quantity-control input');
+  const addToCartBtn = card.querySelector('.add-to-cart');
+
+  let quantity = 0; // Default quantity
+
+  // Event untuk tombol minus
+  minusBtn.addEventListener('click', () => {
+    if (quantity > 0) {
+      quantity--;
+      quantityInput.value = quantity;
+    }
+  });
+
+  // Event untuk tombol plus
+  plusBtn.addEventListener('click', () => {
+    quantity++;
+    quantityInput.value = quantity;
+  });
+
+  // Event untuk tombol Add to Cart
+  addToCartBtn.addEventListener('click', () => {
+    if (quantity > 0) {
+      alert(`${quantity} item(s) ditambahkan ke keranjang!`);
+      // Logic untuk menambahkan ke keranjang bisa ditambahkan di sini
+    } else {
+      alert('Tambahkan jumlah terlebih dahulu!');
+    }
+  });
+});
+
 document.addEventListener('DOMContentLoaded', function () {
   const navLinks = document.querySelectorAll('.nav-link');
 
   navLinks.forEach((link) => {
-      link.addEventListener('click', function (e) {
-          e.preventDefault();
-          let targetId = this.getAttribute('href').substring(1);
-   
-          if (targetId === '') {
-              targetId = 'home';
-          }
+    link.addEventListener('click', function (e) {
+      e.preventDefault(); // Mencegah scroll bawaan browser
+      const targetId = this.getAttribute('href').substring(1); // Ambil ID dari href
+      const targetSection = document.getElementById(targetId);
 
-          const targetSection = document.getElementById(targetId);
-     
-          window.scrollTo({
-              top: targetSection ? targetSection.offsetTop - 70 : 0,
-              behavior: 'smooth',
-          });
-      
-          navLinks.forEach((nav) => nav.classList.remove('active'));
-          this.classList.add('active');
-      });
+      if (targetSection) {
+        targetSection.scrollIntoView({
+          behavior: 'smooth', // Scroll halus
+          block: 'start',
+        });
+
+        // Tambahkan class active pada link yang diklik
+        navLinks.forEach((nav) => nav.classList.remove('active'));
+        this.classList.add('active');
+      }
+    });
   });
 });
 
-// Data Makanan populer
-const DataPopuler = [
-  { name: "Nasi Goreng", rating: "4.5/5", price: "Rp 30.000", image: "../images/Food.png" },
-  { name: "Rendang Padang", rating: "4.7/5", price: "Rp 45.000", image: "../images/Food.png" },
-  { name: "Gado-Gado", rating: "4.8/5", price: "Rp 25.000", image: "../images/Food.png" },
-  { name: "Bakso Malang", rating: "4.5/5", price: "Rp 35.000", image: "../images/Food.png" },
-  { name: "Pisang Goreng", rating: "4.7/5", price: "Rp 20.000", image: "../images/Food.png" },
-  { name: "Ayam Penyet", rating: "4.8/5", price: "Rp 40.000", image: "../images/Food.png" },
-  { name: "Soto Ayam", rating: "4.5/5", price: "Rp 30.000", image: "../images/Food.png" },
-  { name: "Nasi Uduk", rating: "4.7/5", price: "Rp 25.000", image: "../images/Food.png" },
-  { name: "Mie Goreng", rating: "4.8/5", price: "Rp 30.000", image: "../images/Food.png" },
-  { name: "Kwetiau Goreng", rating: "4.5/5", price: "Rp 35.000", image: "../images/Food.png" },
-  { name: "Kerupuk Udang", rating: "4.7/5", price: "Rp 10.000", image: "../images/Food.png" },
-];
+document.addEventListener('DOMContentLoaded', function () {
+  const popularCards = document.getElementById('popular-cards');
+  const makananCards = document.getElementById('makanan-cards');
+  const minumanCards = document.getElementById('minuman-cards');
 
-// Data Menu Makanan
-const DataMakanan = [
-  { name: "Risoles", price: "Rp 15.000", rating: "4.5/5", image: "../images/Food.png" },
-  { name: "Kue Cubit", price: "Rp 10.000", rating: "4.7/5", image: "../images/Food.png" },
-  { name: "Tahu Tempe", price: "Rp 20.000", rating: "4.5/5", image: "../images/Food.png" },
-  { name: "Sempol Ayam", price: "Rp 15.000", rating: "4.7/5", image: "../images/Food.png" },
-  { name: "Martabak Manis", price: "Rp 12.000", rating: "4.5/5", image: "../images/Food.png" },
-  { name: "Cireng", price: "Rp 10.000", rating: "4.7/5", image: "../images/Food.png" },
-  { name: "Pisang Rebus", price: "Rp 8.000", rating: "4.5/5", image: "../images/Food.png" },
-  { name: "Jagung Bakar", price: "Rp 15.000", rating: "4.7/5", image: "../images/Food.png" },
-  { name: "Kue Lapis", price: "Rp 20.000", rating: "4.5/5", image: "../images/Food.png" },
-  { name: "Serabi", price: "Rp 12.000", rating: "4.7/5", image: "../images/Food.png" },
-];
+  fetch('http://127.0.0.1:3000/api/menu')
+    .then((response) => response.json())
+    .then((data) => {
+      // Menampilkan kategori Hidangan Terbaik
+      data
+        .filter((item) => item.isBest)
+        .forEach((item) => {
+          const card = createCard(item);
+          popularCards.appendChild(card);
+        });
 
-// Data Menu Minuman
-const DataMinuman = [
-  { name: "Es Teh Manis", price: "Rp 5.000", rating: "4.8/5", image: "../images/Food.png" },
-  { name: "Jus Alpukat", price: "Rp 15.000", rating: "4.9/5", image: "../images/Food.png" },
-  { name: "Kopi Tubruk", price: "Rp 10.000", rating: "4.8/5", image: "../images/Food.png" },
-  { name: "Es Kelapa Muda", price: "Rp 12.000", rating: "4.9/5", image: "../images/Food.png" },
-  { name: "Wedang Jahe", price: "Rp 8.000", rating: "4.8/5", image: "../images/Food.png" },
-  { name: "Teh Tarik", price: "Rp 10.000", rating: "4.9/5", image: "../images/Food.png" },
-  { name: "Es Jeruk", price: "Rp 7.000", rating: "4.8/5", image: "../images/Food.png" },
-  { name: "Susu Cokelat", price: "Rp 10.000", rating: "4.9/5", image: "../images/Food.png" },
-  { name: "Es Cendol", price: "Rp 8.000", rating: "4.8/5", image: "../images/Food.png" },
-  { name: "Jus Mangga", price: "Rp 15.000", rating: "4.9/5", image: "../images/Food.png" },
-];
+      // Menampilkan kategori Makanan
+      data
+        .filter((item) => item.category === 'Makanan')
+        .forEach((item) => {
+          const card = createCard(item);
+          makananCards.appendChild(card);
+        });
 
+      // Menampilkan kategori Minuman
+      data
+        .filter((item) => item.category === 'Minuman')
+        .forEach((item) => {
+          const card = createCard(item);
+          minumanCards.appendChild(card);
+        });
+    })
+    .catch((error) => console.error('Error fetching menu data:', error));
+});
 
-// Fungsi build cards
-function renderCards(data, containerId) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = "";
-  data.forEach(item => {
-      const card = document.createElement("div");
-      card.classList.add("card");
-      card.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" class="dish-image" />
-          <h3>${item.name}</h3>
-          <p><span class="rating">⭐ ${item.rating}</span></p>
-          <p class="price">${item.price}</p>
-          <div class="quantity-control">
-              <button class="quantity-btn decrease">-</button>
-              <span class="quantity">0</span>
-              <button class="quantity-btn increase">+</button>
-          </div>
-          <button class="add-to-cart" data-name="${item.name}" data-price="${item.price}">Add to Cart</button>
-      `;
-      container.appendChild(card);
+function createCard(item) {
+  const card = document.createElement('div');
+  card.classList.add('dish-card');
 
-      // Fungsi jumlah Makanan
-      const quantityDisplay = card.querySelector(".quantity");
-      let quantity = 0; 
-      const decreaseButton = card.querySelector(".decrease");
-      const increaseButton = card.querySelector(".increase");
-      decreaseButton.addEventListener("click", () => {
-          if (quantity > 0) { 
-              quantity--;
-              quantityDisplay.textContent = quantity; 
-          }
-      });
-      increaseButton.addEventListener("click", () => {
-          quantity++;
-          quantityDisplay.textContent = quantity; 
-      });
+  const imageUrl = item.imageUrl || 'default.png'; // Gambar default jika tidak ada
+  card.innerHTML = `
+    <img src="${imageUrl}" alt="${item.itemName}">
+    <h3>${item.itemName}</h3>
+    <p>${item.description}</p>
+    <p>Rp <span class="price">${item.price}</span></p>
+    <div class="quantity-control">
+      <button class="minus">-</button>
+      <span class="quantity">0</span>
+      <button class="plus">+</button>
+    </div>
+    <button class="add-to-cart">Add to Cart</button>
+  `;
 
-      // fungsi add to card
-      const addToCartButton = card.querySelector(".add-to-cart");
-      addToCartButton.addEventListener("click", () => {
-          if (quantity > 0) { // Only redirect if quantity is greater than 0
-              // Redirect to checkout page with selected item data
-              window.location.href = `../checkoutPage/checkoutPage.html?item=${item.name}&quantity=${quantity}&price=${item.price}`;
-          } else {
-              alert("Please select at least one item before adding to cart.");
-          }
-      });
-  });
+  return card;
 }
-
-// Render card setiap kategori
-window.addEventListener("DOMContentLoaded", () => {
-  renderCards(DataPopuler, "dish-cards");
-  renderCards(DataMakanan, "snacks-cards");
-  renderCards(DataMinuman, "regular-cards");
-});
-
-// Fungsi drag scroll
-const dishCardsContainer = document.getElementById("dish-cards");
-
-let isDown = false;
-let startX;
-let scrollLeft;
-
-dishCardsContainer.addEventListener("mousedown", (e) => {
-  isDown = true;
-  startX = e.pageX - dishCardsContainer.offsetLeft;
-  scrollLeft = dishCardsContainer.scrollLeft;
-  dishCardsContainer.style.cursor = 'grabbing'; 
-});
-
-dishCardsContainer.addEventListener("mouseleave", () => {
-  isDown = false;
-  dishCardsContainer.style.cursor = 'grab'; 
-});
-
-dishCardsContainer.addEventListener("mouseup", () => {
-  isDown = false;
-  dishCardsContainer.style.cursor = 'grab'; 
-});
-
-dishCardsContainer.addEventListener("mousemove", (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - dishCardsContainer.offsetLeft;
-  const walk = (x - startX) * 3;
-  dishCardsContainer.scrollLeft = scrollLeft - walk;
-});

@@ -1,4 +1,4 @@
-
+/* General Reset */
 * {
   margin: 0;
   padding: 0;
@@ -7,20 +7,24 @@
 
 body {
   font-family: Arial, sans-serif;
-  margin-bottom: -60px;
+  padding-top: 70px;
+  overflow-y: auto;
 }
 
+/* Header styling */
 header {
   width: 100%;
-  background-color: #fff;
+  background-color: #ffff;
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: fixed;
-  height: 60px;
+  top: 0;
+  left: 0;
   z-index: 1000;
+  height: 70px;
 }
 
-
+/* Navbar styling */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -28,7 +32,7 @@ header {
   width: 100%;
 }
 
-
+/* Logo styling and icon positioning */
 .logo-container {
   display: flex;
   align-items: center;
@@ -36,18 +40,18 @@ header {
 }
 
 .logo-image {
-  margin-right: 10px; 
+  margin-right: 10px; /* Space between logo and bars icon */
 }
 
 .bars-icon {
-  display: none; 
+  display: none; /* Hide by default for desktop */
   background: none;
   border: none;
   font-size: 1.5em;
   cursor: pointer;
 }
 
-
+/* Navigation links styling */
 .nav-links {
   display: flex;
   list-style: none;
@@ -65,7 +69,7 @@ header {
   color: #4caf50;
 }
 
-
+/* Profile section styling */
 .profile-section {
   display: flex;
   align-items: center;
@@ -73,19 +77,19 @@ header {
   position: relative;
 }
 
-
+/* Action items styling */
 .action-items {
   display: flex;
   align-items: center;
 }
 
-
+/* Responsive styling */
 @media (max-width: 768px) {
   .nav-links {
-    display: none; 
+    display: none; /* Hide nav-links initially on mobile */
     flex-direction: column;
     position: absolute;
-    top: 60px;
+    top: 60px; /* Adjust based on header height */
     left: 0;
     width: 100%;
     background-color: white;
@@ -94,17 +98,17 @@ header {
   }
 
   .nav-links.active {
-    display: flex; 
+    display: flex; /* Show nav-links when active */
   }
 
   .bars-icon {
-    display: block;
+    display: block; /* Show bars icon on mobile */
   }
 }
 
 .search-btn {
   background-color: #4caf50;
-  border: none;
+  border: black;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -131,7 +135,7 @@ header {
   font-size: 14px;
 }
 
-
+/* Profile picture styling */
 .profile-pic {
   width: 30px;
   height: 30px;
@@ -140,131 +144,155 @@ header {
 }
 
 .logo-container .logo-image {
-  width: 150px;
+  width: 100px;
   height: auto;
   margin-left: 30px;
 }
 
+html,
+body {
+  height: 100%;
+}
+
+/* Section Styles */
+section {
+  padding: 70px 20px; /* Jarak atas untuk kompensasi navbar */
+  text-align: center;
+}
+
+.popular {
+  margin-bottom: 60px; /* Jarak antar section */
+}
 
 .makanan {
-  text-align: center;
-  padding: 90px 20px;
+  margin-bottom: 60px; /* Jarak antar section */
 }
 
-.makanan h2 {
+.popular h2,
+.makanan h2,
+.minuman h2 {
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 2cm;
 }
 
-.makanan .highlight {
+.highlight {
   color: #4caf50;
   font-weight: bold;
 }
 
+/* Dish Cards Styling */
 .dish-cards {
   display: flex;
-  overflow-x: auto; 
-  gap: 16px;
-  padding: 16px;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none; 
-  scrollbar-width: none; 
-  width: 100%; 
-  max-width: 1200px; 
-  margin: 0 auto; 
+  gap: 60px; /* Jarak antar card */
+  overflow-x: auto; /* Scroll horizontal */
+  padding: 20px; /* Padding internal */
+  margin: 0 auto;
+  width: calc(100vw - 40px); /* Pastikan scroll horizontal penuh */
 }
 
-.dish-cards::-webkit-scrollbar {
-  display: none;  
-}
-
-.card {
-  flex: 1 1 200px; 
-  min-width: 200px; 
-  max-width: 300px; 
-  position: relative;
-  overflow: hidden;
-  border: 2px dashed #4caf50;
-  padding: 20px;
-  border-radius: 10px;
+.dish-card {
+  flex: 0 0 auto;
+  width: 250px;
+  background: #e8fff3; /* Warna latar card */
+  border: 2px dashed #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  background-color: #f0f9f1;
-  transition: transform 0.2s; 
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column; /* Tata letak vertikal */
+  justify-content: space-between; /* Elemen utama terpisah dengan jarak fleksibel */
 }
 
-.card:hover {
-  transform: scale(1.05); 
+.dish-card img {
+  width: 150px;
+  height: 150px; /* Tinggi tetap untuk gambar */
+  border-radius: 50%; /* Membuat gambar lingkaran */
+  object-fit: cover; /* Gambar tetap proporsional */
+  margin: 0 auto 10px auto; /* Gambar ditengah secara horizontal */
+  background-color: #ccc; /* Placeholder warna jika gambar belum ada */
 }
 
-.dish-image {
-  width: 100%;
-  height: auto;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
-
-.card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.rating {
-  font-size: 14px;
-  color: #f1c40f;
-  margin-bottom: 10px;
-}
-
-.price {
-  font-size: 18px;
+.dish-card h3 {
+  font-size: 20px;
+  margin: 5px 0; /* Jarak kecil antara nama makanan dan deskripsi */
   color: #333;
-  margin-bottom: 15px;
+}
+
+.dish-card p {
+  font-size: 14px;
+  margin: 5px 0 15px 0; /* Jarak kecil dengan nama makanan, lebih besar di bawah */
+  color: #333;
+}
+
+.dish-card .price {
+  font-size: 24px; /* Membuat harga lebih besar */
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 20px; /* Jarak dengan tombol quantity-control */
 }
 
 .quantity-control {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  gap: 15px; /* Jarak antar tombol */
+  margin-top: 20px; /* Jarak lebih besar antara harga dan kontrol jumlah */
 }
 
-.quantity-btn {
-  background-color: #4caf50;
-  border: none;
+.quantity-control button {
+  padding: 5px 10px;
+  background-color: #28a745; /* Warna hijau tombol */
   color: white;
-  padding: 10px; 
-  width: 40px; 
-  height: 40px; 
-  border-radius: 50%; 
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  font-size: 20px; 
+  font-size: 16px;
 }
 
+.quantity-control button:hover {
+  background-color: #218838; /* Warna hijau hover */
+}
 
-.quantity {
-  margin: 0 10px;
+.quantity-control input {
+  width: 50px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   font-size: 16px;
 }
 
 .add-to-cart {
-  background-color: #4caf50;
+  margin-top: 25px; /* Tambahkan jarak besar antara tombol quantity dan Add to Cart */
+  padding: 10px 20px;
+  background-color: #28a745; /* Warna hijau yang sama dengan tombol quantity */
   color: white;
-  padding: 10px;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 25px; 
-  width: 100%;
   font-size: 16px;
-  transition: background-color 0.3s;
 }
 
 .add-to-cart:hover {
-  background-color: #45a049; 
+  background-color: #218838; /* Warna hijau hover */
 }
 
+/* Custom scrollbar for dish cards */
+.dish-cards::-webkit-scrollbar {
+  height: 8px;
+}
 
+.dish-cards::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.dish-cards::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Footer Styles */
 .footer {
   background-color: #e8f9e8;
   padding: 20px;
@@ -276,40 +304,17 @@ header {
   color: #333;
 }
 
-.footer-left {
-  text-align: left;
+.footer-logo img {
+  height: 15px;
 }
 
-.footer-logo {
-  font-size: 18px;
-  color: #4caf50;
-  font-weight: bold;
-}
-
-.footer-logo span {
-  color: #4caf50;
-}
-
-.footer-right {
-  text-align: right;
-}
-
-.social-icons {
-  margin-bottom: 5px;
-}
-
-.social-icons a {
+.footer-right .social-icons a {
   color: #333;
   margin: 0 5px;
   text-decoration: none;
   font-size: 18px;
 }
 
-.social-icons a:hover {
+.footer-right .social-icons a:hover {
   color: #4caf50;
-}
-
-.footer-logo img {
-  height: 15px; 
-  width: auto;
 }

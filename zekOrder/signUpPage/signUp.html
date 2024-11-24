@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../signUpPage/signUp.css" />
     <title>Sign Up</title>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+    <script type="module" src="../signUpPage/signUp.js"></script>
   </head>
   <body>
+    <div id="loading-spinner" class="loading-spinner" style="display: none"></div>
+
     <div class="background">
       <img src="../images/login.png" width="800" height="815" />
     </div>
@@ -14,22 +21,39 @@
       <img class="logozek" src="../images/logozek.png" />
       <div class="container-signup">
         <h2>Create Account</h2>
-        <form>
+        <form id="signUpForm" onsubmit="return false;">
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" placeholder="Enter your username" />
+          <input type="text" id="username" name="username" placeholder="Enter your username" required />
           <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="youraddress@gmail.com" />
+          <input type="email" id="email" name="email" placeholder="youraddress@gmail.com" required />
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="Enter your password" />
+          <input type="password" id="password" name="password" placeholder="Enter your password" required />
+          <div class="container-loginwith">
+            <!-- Tombol Login Google -->
+            <div type="" class="Google_Login">
+              <button type="submit" class="Google_Login_Button">
+                <div class="logo_google">
+                  <img src="../images/google.png" width="30" height="30" />
+                </div>
+                Login with Google
+              </button>
+            </div>
+            <div class="Facebook_Login">
+              <button type="submit" class="Facebook_Login_Button">
+                <div class="logo_facebook">
+                  <img src="../images/fb.png" width="50" height="50" />
+                </div>
+                Login with Facebook
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="sign_up_button">Sign Up</button>
         </form>
-        <button type="button" class="signup" href="#"><b>Create Account</b></button>
+
+        <div id="signUpError" style="color: red"></div>
         <p class="already">
-          Already have an account ? <a class="login" href="#"><b>Log in</b></a>
+          Already have an account? <a class="login" href="../loginPage/login.html"><b>Log in</b></a>
         </p>
-      </div>
-      <div class="container-loginwith">
-        <button type="button" class="loginwith"><img class="loginlogo" src="../images/Google.png" /> Login with Google</button>
-        <button type="button" class="loginwith"><img class="loginlogo" src="../images/facebook.png" /> Login with Facebook</button>
       </div>
     </div>
   </body>
