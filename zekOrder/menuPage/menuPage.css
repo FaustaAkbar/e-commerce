@@ -14,7 +14,7 @@ body {
 /* Header styling */
 header {
   width: 100%;
-  background-color: #ffff;
+  background-color: #fff;
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: fixed;
@@ -69,18 +69,11 @@ header {
   color: #4caf50;
 }
 
-/* Profile section styling */
-.profile-section {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  position: relative;
-}
-
 /* Action items styling */
 .action-items {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 /* Responsive styling */
@@ -108,7 +101,7 @@ header {
 
 .search-btn {
   background-color: #4caf50;
-  border: black;
+  border: none;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -135,20 +128,6 @@ header {
   font-size: 14px;
 }
 
-/* Profile picture styling */
-.profile-pic {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 30px;
-}
-
-.logo-container .logo-image {
-  width: 100px;
-  height: auto;
-  margin-left: 30px;
-}
-
 html,
 body {
   height: 100%;
@@ -160,17 +139,17 @@ section {
   text-align: center;
 }
 
-.popular {
-  margin-bottom: 60px; /* Jarak antar section */
-}
-
-.makanan {
+.popular,
+.makanan,
+.minuman,
+.search-results-section {
   margin-bottom: 60px; /* Jarak antar section */
 }
 
 .popular h2,
 .makanan h2,
-.minuman h2 {
+.minuman h2,
+.search-results-section h2 {
   font-size: 24px;
   margin-bottom: 2cm;
 }
@@ -183,16 +162,15 @@ section {
 /* Dish Cards Styling */
 .dish-cards {
   display: flex;
-  gap: 60px; /* Jarak antar card */
-  overflow-x: auto; /* Scroll horizontal */
+  gap: 20px; /* Jarak antar card */
+  flex-wrap: wrap;
+  justify-content: center; /* Letakkan card di tengah */
   padding: 20px; /* Padding internal */
   margin: 0 auto;
-  width: calc(100vw - 40px); /* Pastikan scroll horizontal penuh */
 }
 
 .dish-card {
-  flex: 0 0 auto;
-  width: 250px;
+  flex: 0 1 250px; /* Ukuran tetap dan fleksibel */
   background: #e8fff3; /* Warna latar card */
   border: 2px dashed #ccc;
   padding: 15px;

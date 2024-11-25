@@ -1,3 +1,4 @@
+// Fungsi untuk membuka dan menutup kotak pencarian
 function toggleSearchBox() {
   const searchBox = document.getElementById('search-box');
   if (searchBox.style.display === 'none' || searchBox.style.display === '') {
@@ -13,6 +14,7 @@ function toggleSearchBox() {
   }
 }
 
+// Fungsi untuk membuka dan menutup navigasi
 function toggleNav() {
   const navLinks = document.getElementById('nav-links');
   navLinks.classList.toggle('active');
@@ -39,59 +41,62 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
-});
 
-document.addEventListener('DOMContentLoaded', function () {
-  const popularCards = document.getElementById('popular-cards');
-  const makananCards = document.getElementById('makanan-cards');
-  const minumanCards = document.getElementById('minuman-cards');
-
+  // Ambil data menu dari API
   fetch('http://127.0.0.1:3000/api/menu')
     .then((response) => response.json())
     .then((data) => {
+      // Simpan data untuk pencarian
+      window.menuData = data;
+
       // Menampilkan kategori Hidangan Terbaik
-      data
-        .filter((item) => item.isBest)
-        .forEach((item) => {
-          const card = createCard(item);
-          popularCards.appendChild(card);
-        });
+      displayMenuItems(
+        data.filter((item) => item.isBest),
+        'popular-cards'
+      );
 
       // Menampilkan kategori Makanan
-      data
-        .filter((item) => item.category === 'Makanan')
-        .forEach((item) => {
-          const card = createCard(item);
-          makananCards.appendChild(card);
-        });
+      displayMenuItems(
+        data.filter((item) => item.category === 'Makanan'),
+        'makanan-cards'
+      );
 
       // Menampilkan kategori Minuman
-      data
-        .filter((item) => item.category === 'Minuman')
-        .forEach((item) => {
-          const card = createCard(item);
-          minumanCards.appendChild(card);
-        });
+      displayMenuItems(
+        data.filter((item) => item.category === 'Minuman'),
+        'minuman-cards'
+      );
     })
     .catch((error) => console.error('Error fetching menu data:', error));
 });
 
+// Fungsi untuk menampilkan item menu
+function displayMenuItems(items, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  items.forEach((item) => {
+    const card = createCard(item);
+    container.appendChild(card);
+  });
+}
+
+// Fungsi untuk membuat kartu item
 function createCard(item) {
   const card = document.createElement('div');
   card.classList.add('dish-card');
 
   const imageUrl = item.imageUrl || 'default.png'; // Gambar default jika tidak ada
   card.innerHTML = `
-      <img src="${imageUrl}" alt="${item.itemName}">
-      <h3>${item.itemName}</h3>
-      <p>${item.description}</p>
-      <p>Rp <span class="price">${item.price}</span></p>
-      <div class="quantity-control">
-          <button class="minus">-</button>
-          <span class="quantity">0</span>
-          <button class="plus">+</button>
-      </div>
-      <button class="add-to-cart">Add to Cart</button>
+    <img src="${imageUrl}" alt="${item.itemName}">
+    <h3>${item.itemName}</h3>
+    <p>${item.description}</p>
+    <p>Rp <span class="price">${item.price}</span></p>
+    <div class="quantity-control">
+      <button class="minus">-</button>
+      <span class="quantity">0</span>
+      <button class="plus">+</button>
+    </div>
+    <button class="add-to-cart">Add to Cart</button>
   `;
 
   const quantityElement = card.querySelector('.quantity');
@@ -122,15 +127,10 @@ function createCard(item) {
   return card;
 }
 
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-function updateCart() {
-  localStorage.setItem('cart', JSON.stringify(cart));
-}
-
+// Fungsi untuk menambah item ke keranjang
 function addToCart(item, quantity) {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+  const existingItem = cart.find((cartItem) => cartItem._id === item._id);
 
   if (existingItem) {
     existingItem.quantity += quantity; // Tambahkan jumlah
@@ -138,5 +138,28 @@ function addToCart(item, quantity) {
     cart.push({ ...item, quantity }); // Tambahkan item baru ke keranjang
   }
 
-  localStorage.setItem('cart', JSON.stringify(cart)); // Simpan ke localStorage
+  localStorage.setItem('cart', JSON.stringify(cart)); // Simpan ke LocalStorage
+}
+
+// Fungsi untuk menangani pencarian
+function handleSearch() {
+  const searchQuery = document.getElementById('search-input').value.toLowerCase();
+  const searchResultsSection = document.getElementById('search-results-section');
+  const searchResultsContainer = document.getElementById('search-results');
+
+  // Kosongkan hasil pencarian sebelumnya
+  searchResultsContainer.innerHTML = '';
+
+  // Tampilkan atau sembunyikan section hasil pencarian
+  if (searchQuery === '') {
+    searchResultsSection.style.display = 'none';
+  } else {
+    searchResultsSection.style.display = 'block';
+  }
+
+  // Filter dan tampilkan kartu yang sesuai dengan hasil pencarian
+  const searchResults = window.menuData.filter((item) => item.itemName.toLowerCase().includes(searchQuery) || item.description.toLowerCase().includes(searchQuery));
+
+  // Tampilkan hasil pencarian di section hasil pencarian
+  displayMenuItems(searchResults, 'search-results');
 }

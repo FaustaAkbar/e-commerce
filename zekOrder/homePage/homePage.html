@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Food Dash Header</title>
     <link rel="stylesheet" href="homePage.css" />
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
     <script src="../homePage/homePage.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -30,21 +34,17 @@
         </ul>
 
         <div class="profile-section">
-          <div class="action-items">
-            <button class="search-btn" onclick="toggleSearchBox()">
-              <i class="fas fa-search"></i>
-            </button>
-            <div id="search-box" class="search-box" style="display: none">
-              <input type="text" placeholder="Search..." />
-            </div>
-          </div>
+          <!-- Nama pengguna -->
+          <span id="greeting" class="greeting">Selamat datang,</span>
+
+          <!-- Icon Profil -->
           <img src="../assets/images/profile.png" alt="Profile Image" class="profile-pic" onclick="toggleProfileDrawer()" />
 
           <!-- Profile Drawer -->
           <div id="profile-drawer" class="profile-drawer" style="display: none">
             <ul>
-              <li><a href="#">Profil</a></li>
-              <li><a href="#">Pengaturan</a></li>
+              <!-- <li><a href="#">Profil</a></li>
+              <li><a href="#">Pengaturan</a></li> -->
               <li><a href="#" onclick="logout()">Logout</a></li>
             </ul>
           </div>

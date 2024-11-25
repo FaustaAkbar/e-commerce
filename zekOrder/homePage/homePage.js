@@ -1,18 +1,54 @@
-// Fungsi untuk menampilkan atau menyembunyikan kotak pencarian
-function toggleSearchBox() {
-  const searchBox = document.getElementById('search-box');
-  if (searchBox.style.display === 'none' || searchBox.style.display === '') {
-    searchBox.style.display = 'block';
-    setTimeout(() => {
-      searchBox.style.opacity = 1;
-    }, 200);
-  } else {
-    searchBox.style.opacity = 0;
-    setTimeout(() => {
-      searchBox.style.display = 'none';
-    }, 300);
-  }
-}
+const firebaseConfig = {
+  apiKey: 'AIzaSyDjSklo0IOQsoA7R8HwH9FkLleEUM3Gqic',
+  authDomain: 'zekorder.firebaseapp.com',
+  projectId: 'zekorder',
+  storageBucket: 'zekorder.firebasestorage.app',
+  messagingSenderId: '203832099160',
+  appId: '1:203832099160:web:47e37862cfe85bb150e52d',
+};
+
+// Inisialisasi Firebase
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Periksa apakah pengguna login
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      // Ambil data user dari Firestore
+      const userId = user.uid;
+      const userDocRef = db.collection('users').doc(userId);
+
+      userDocRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const userData = doc.data();
+            const username = userData.username || 'User';
+            const profilePicture = userData.profilePicture || '../assets/images/profile.png'; // Default jika tidak ada foto profil
+
+            // Update nama pengguna di header
+            document.getElementById('greeting').textContent = `Selamat datang, ${username}`;
+
+            // Update gambar profil
+            const profilePicElement = document.querySelector('.profile-pic');
+            if (profilePicElement) {
+              profilePicElement.src = profilePicture;
+            }
+          } else {
+            console.log('User document tidak ditemukan');
+          }
+        })
+        .catch((error) => {
+          console.error('Error mengambil data user:', error);
+        });
+    } else {
+      // Jika tidak login, arahkan ke halaman login
+      window.location.href = '../loginPage/login.html';
+    }
+  });
+});
 
 function toggleNav() {
   const navLinks = document.getElementById('nav-links');

@@ -31,17 +31,18 @@
               <i class="fas fa-search"></i>
             </button>
             <div id="search-box" class="search-box" style="display: none">
-              <input type="text" id="search-input" placeholder="Search..." />
+              <input type="text" id="search-input" placeholder="Search..." oninput="handleSearch()" />
             </div>
           </div>
-          <div id="search-results" class="search-results"></div>
-
-          <img src="../assets/images/profile.png" alt="Profile Image" class="profile-pic" />
         </div>
       </nav>
     </header>
 
     <!-- List Makanan -->
+    <section id="search-results-section" class="search-results-section" style="display: none">
+      <h2>Hasil <span class="highlight">Pencarian</span></h2>
+      <div class="dish-cards" id="search-results"></div>
+    </section>
     <section id="popular" class="popular">
       <h2>Hidangan <span class="highlight">Terbaik</span> Kami</h2>
       <div class="dish-cards" id="popular-cards"></div>

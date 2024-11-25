@@ -16,7 +16,7 @@ body {
 header {
   width: 100%;
   background-color: #e8fff3;
-  padding: 10px 20px;
+  padding: 20px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
@@ -28,16 +28,27 @@ header {
 /* Navbar styling */
 .navbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+  justify-content: center; /* Letakkan elemen secara horizontal di tengah */
+  align-items: center; /* Vertikal sejajar */
+  position: relative; /* Agar elemen posisi kanan tetap berfungsi */
+  height: 20px;
 }
 
-/* Logo styling and icon positioning */
+/* Logo Container */
 .logo-container {
+  position: absolute; /* Posisikan di sisi kiri */
+  left: 20px;
   display: flex;
   align-items: center;
-  height: 50px;
+}
+
+/* Profile Section */
+.profile-section {
+  position: absolute; /* Posisikan di sisi kanan */
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .logo-image {
@@ -70,12 +81,54 @@ header {
   color: #4caf50;
 }
 
-/* Profile section styling */
-.profile-section {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  position: relative;
+.profile-pic {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.greeting {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+.profile-drawer {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  width: 150px;
+  z-index: 2000;
+  padding: 10px 0;
+}
+
+.profile-drawer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-drawer ul li {
+  padding: 10px 20px;
+  text-align: left;
+}
+
+.profile-drawer ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  display: block;
+}
+
+.profile-drawer ul li:hover {
+  background-color: #e8f5e9;
+}
+
+.profile-drawer ul li a:hover {
+  color: #4caf50;
 }
 
 /* Action items styling */
@@ -105,35 +158,6 @@ header {
   .bars-icon {
     display: block; /* Show bars icon on mobile */
   }
-}
-
-.search-btn {
-  background-color: #4caf50;
-  border: black;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  cursor: pointer;
-}
-
-.search-box {
-  display: none;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translate(-170%, -50%);
-  margin-left: 10px;
-  transition: opacity 0.3s ease;
-}
-
-.search-box input {
-  padding: 5px;
-  font-size: 14px;
 }
 
 /* Profile picture styling */
@@ -326,24 +350,6 @@ body {
   text-decoration: underline;
 }
 
-/* Styling for the "See All Menu" button */
-.see-all-menu {
-  display: inline-block;
-  margin-top: 50px;
-  padding: 10px 20px;
-  background-color: #4caf50; /* Warna tombol */
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 5px;
-  text-align: center;
-  transition: background-color 0.3s;
-}
-
-.see-all-menu:hover {
-  background-color: #388e3c; /* Warna tombol saat hover */
-}
-
 /* Footer Styling */
 footer {
   background-color: #e8fff3;
@@ -420,44 +426,5 @@ footer {
 }
 
 .social-icons i:hover {
-  color: #4caf50;
-}
-
-/* Profile Drawer Styling */
-.profile-drawer {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  background-color: #fff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  width: 150px;
-  z-index: 2000;
-  padding: 10px 0;
-}
-
-.profile-drawer ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.profile-drawer ul li {
-  padding: 10px 20px;
-  text-align: left;
-}
-
-.profile-drawer ul li a {
-  color: #333;
-  text-decoration: none;
-  font-size: 14px;
-  display: block;
-}
-
-.profile-drawer ul li:hover {
-  background-color: #e8f5e9;
-}
-
-.profile-drawer ul li a:hover {
   color: #4caf50;
 }

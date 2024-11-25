@@ -56,7 +56,7 @@ const login = () => {
   const email = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
-  showLoader(); // Tampilkan loader
+  showLoader(); //loader
 
   auth
     .signInWithEmailAndPassword(email, password)
@@ -65,7 +65,7 @@ const login = () => {
       const docRef = db.collection('users').doc(user.uid);
 
       return docRef.get().then((doc) => {
-        hideLoader(); // Sembunyikan loader
+        hideLoader();
 
         if (doc.exists) {
           console.log('Akun anda berhasil login');
@@ -78,7 +78,7 @@ const login = () => {
       });
     })
     .catch((error) => {
-      hideLoader(); // Sembunyikan loader jika terjadi error
+      hideLoader();
       console.log('Error: ' + error.message);
       alert('Login error: ' + error.message);
     });
@@ -87,7 +87,7 @@ const login = () => {
 const loginWithGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
 
-  showLoader(); // Tampilkan loader
+  showLoader();
 
   auth
     .signInWithPopup(provider)
@@ -109,11 +109,11 @@ const loginWithGoogle = () => {
       });
     })
     .then(() => {
-      hideLoader(); // Sembunyikan loader
+      hideLoader();
       window.location.href = '../homePage/homePage.html';
     })
     .catch((error) => {
-      hideLoader(); // Sembunyikan loader jika terjadi error
+      hideLoader();
       console.log('Error Google Sign-In:', error.message);
       alert('Google Sign-In error: ' + error.message);
     });
@@ -122,7 +122,7 @@ const loginWithGoogle = () => {
 const loginWithFacebook = () => {
   const provider = new firebase.auth.FacebookAuthProvider();
 
-  showLoader(); // Tampilkan loader
+  showLoader();
 
   auth
     .signInWithPopup(provider)

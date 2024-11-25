@@ -1,61 +1,93 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
+const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
+
 const app = express();
 const port = 3000;
 
-let menuCache = null; // Variabel untuk menyimpan data menu yang sudah di-cache
-const menuFilePath = path.join(__dirname, 'zekOrder', 'assets', 'ZekMenu.json');
+// Koneksi ke MongoDB
+mongoose
+  .connect('mongodb://localhost:27017/zekMenu', {})
+  .then(() => console.log('MongoDB Connected!'))
+  .catch((err) => console.error(err));
 
-// Menyajikan file statis dari folder 'zekOrder' dan 'assets/images'
+const menuSchema = new mongoose.Schema({
+  itemName: { type: String, required: true },
+  description: { type: String, required: true },
+  price: { type: Number, required: true },
+  category: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  isBest: { type: Boolean, required: true },
+});
+// Model Menu
+const Menu = mongoose.model('Menu', menuSchema);
+
+const cartSchema = new mongoose.Schema({
+  itemId: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart', required: true },
+  itemName: { type: String, required: true },
+  price: { type: Number, required: true },
+  quantity: { type: Number, required: true },
+});
+
+const Cart = mongoose.model('Cart', cartSchema);
+
+// Middleware
 app.use(cors());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'zekOrder')));
 app.use('/images', express.static(path.join(__dirname, 'zekOrder', 'assets', 'images')));
 
-// Endpoint untuk mengirimkan halaman utama
+// Rute Frontend
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'zekOrder', 'index.html'));
 });
 
-// Fungsi untuk membaca dan meng-cache file menu
-const readMenuFile = () => {
-  fs.readFile(menuFilePath, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading JSON file:', err);
-      return;
-    }
-
-    try {
-      menuCache = JSON.parse(data); // Menyimpan data JSON ke dalam cache
-      console.log('Menu data successfully loaded into cache.');
-    } catch (parseError) {
-      console.error('Error parsing JSON data:', parseError);
-    }
-  });
-};
-
-// Endpoint untuk mengambil menu
-app.get('/api/menu', (req, res) => {
-  if (menuCache) {
-    // Jika menu sudah ada di cache, kirimkan langsung
-    res.json(menuCache);
-  } else {
-    // Jika belum ada di cache, baca file menu dan kirimkan data
-    console.log('Menu data is not in cache, reading from file...');
-    readMenuFile();
-    res.json({ error: 'Menu is loading, please try again shortly.' });
+// API Endpoint
+app.get('/api/menu', async (req, res) => {
+  try {
+    const menus = await Menu.find();
+    res.json(menus);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error fetching data' });
   }
 });
 
-// Membaca file menu pertama kali saat server dijalankan
-readMenuFile();
+app.post('/api/menu', async (req, res) => {
+  try {
+    const newMenu = new Menu(req.body);
+    const savedMenu = await newMenu.save();
+    res.status(201).json(savedMenu);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error saving data' });
+  }
+});
 
-// Menggunakan fs.watch untuk memonitor perubahan file
-fs.watch(menuFilePath, (eventType, filename) => {
-  if (eventType === 'change') {
-    console.log(`${filename} has been updated. Reloading menu data...`);
-    readMenuFile(); // Memperbarui cache dengan data terbaru
+app.post('/api/cart/add', async (req, res) => {
+  try {
+    const { itemId, quantity } = req.body;
+    const menuItem = await Cart.findById(itemId);
+    if (!menuItem) {
+      return res.status(404).json({ message: 'Menu item not found' });
+    }
+    const cartItem = new Cart({ itemId: menuItem._id, itemName: menuItem.itemName, price: menuItem.price, quantity: quantity });
+    await cartItem.save();
+    res.status(201).json(cartItem);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error adding item to cart' });
+  }
+});
+
+app.get('/api/cart', async (req, res) => {
+  try {
+    const cartItems = await Cart.find();
+    res.json(cartItems);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error fetching cart items' });
   }
 });
 
