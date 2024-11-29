@@ -1,0 +1,8 @@
+com\example\backend\model\User.class
+com\example\backend\repository\MenuRepository.class
+com\example\backend\controller\UserController.class
+com\example\backend\model\MenuItem.class
+com\example\backend\controller\MenuController.class
+com\example\backend\repository\UserRepository.class
+com\example\backend\BackendApplication.class
+com\example\backend\config\WebConfig.class

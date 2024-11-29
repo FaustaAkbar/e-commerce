@@ -1,0 +1,274 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #e0ffe1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    display: flex;
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+  }
+  
+  .cart-container {
+    background-color: #ffffff;
+    width: 60%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    font-size: 2em;
+    color: #3aa849;
+  }
+  
+  h1 span {
+    font-weight: bold;
+  }
+  
+  .divider {
+    border-top: 2px dashed #3aa849;
+    margin: 10px 0 20px;
+  }
+  
+  .section-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .cart-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .item-name {
+    flex: 1;
+    font-size: 1em;
+    color: #333;
+  }
+  
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .quantity-controls button {
+    background-color: #3aa849;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 1.2em;
+  }
+  
+  .quantity {
+    font-size: 1.2em;
+    width: 20px;
+    text-align: center;
+  }
+  
+  .price {
+    font-weight: bold;
+    margin-left: 10px;
+    color: #333;
+  }
+  
+  .delete {
+    background: none;
+    border: none;
+    color: #ff3b3b;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  
+  /* Right side (Checkout Details) */
+  .checkout-container {
+    background-color: #3aa849;
+    width: 35%;
+    padding: 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .checkout-container h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+  }
+  
+  .card-details {
+    width: 100%;
+  }
+  
+  .card-details label {
+    display: block;
+    margin: 10px 0 5px;
+  }
+  
+  .card-details input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+  }
+  
+  .profile-img {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-img img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .card-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .card-info div {
+    width: 48%;
+  }
+  
+  .summary {
+    margin-top: 20px;
+    font-size: 1em;
+  }
+  
+  .summary p {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .checkout {
+    background-color: #ffffff;
+    color: #3aa849;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .checkout:hover {
+    background-color: #2f8c3e;
+    color: #ffffff;
+  }
+  
+  /* Style untuk Modal */
+  .modal {
+    display: none; /* Awalnya disembunyikan */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Konten Modal */
+  .modal-content {
+    background-color: #f2f2f2;
+    margin: 5% auto; /* Mengurangi margin agar modal lebih besar */
+    padding: 30px;
+    border-radius: 10px;
+    width: 60%; /* Membuat modal lebih besar */
+    max-width: 800px;
+    text-align: center;
+  }
+  
+  /* Tombol Tutup */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Gaya pilihan pembayaran */
+  .payment-options {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .payment-method {
+    text-align: center;
+    background-color: #4caf50; /* Warna hijau untuk box */
+    padding: 20px;
+    border-radius: 10px; /* Rounding untuk tampilan lebih rapi */
+    width: 150px; /* Ukuran box */
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease; /* Animasi saat hover */
+  }
+  
+  .payment-method:hover {
+    transform: scale(1.05); /* Efek zoom saat hover */
+  }
+  
+  .payment-method img {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 10px;
+  }
+  
+  .payment-method p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff; /* Warna teks menjadi putih agar kontras dengan box hijau */
+  }
+  

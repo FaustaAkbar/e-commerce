@@ -1,0 +1,32 @@
+body {
+    width: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background: #f4f4f4;
+    color: #333;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+  
+  button:focus,
+  input:focus {
+    outline: none;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
