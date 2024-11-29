@@ -181,7 +181,8 @@ html {
 }
 
 .card {
-  flex: 1 1 200px; 
+  flex: 1 1 200px;
+  max-height: 388px;
   min-width: 200px; 
   max-width: 300px; 
   position: relative;
@@ -200,7 +201,9 @@ html {
 
 .dish-image {
   width: 100%;
-  height: auto;
+  height: 100%;
+  max-width: 156px;
+  max-height: 156px ;
   border-radius: 50%;
   margin-bottom: 10px;
 }
