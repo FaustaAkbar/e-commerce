@@ -62,6 +62,23 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(Collections.singletonMap("message", "An error occurred: " + e.getMessage()));
     }
-}
+        }
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody User loginRequest) {
+        try {
+            Optional<User> user = userRepository.findByEmail(loginRequest.getEmail());
+            
+            if (user.isPresent() && user.get().getPassword().equals(loginRequest.getPassword())) {
+                return ResponseEntity.ok()
+                        .body(Collections.singletonMap("message", "Login successful"));
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Collections.singletonMap("message", "Invalid email or password"));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Collections.singletonMap("message", "An error occurred: " + e.getMessage()));
+        }
+    }
 
 }

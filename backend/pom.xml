@@ -30,6 +30,21 @@
             <artifactId>spring-boot-starter-validation</artifactId>
             <version>3.1.0</version>
         </dependency>
+         <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+
+        <!-- DevTools for Hot Reload -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>3.1.4</version> <!-- Tambahkan versi -->
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
 
 
     </dependencies>
