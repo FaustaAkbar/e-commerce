@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import '../styles/menuPage.css';
-
+import '../../styles/menuPage.css';
 const Header = () => {
   const [showNav, setShowNav] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -33,29 +32,17 @@ const Header = () => {
         </div>
         <ul className={`nav-links ${showNav ? 'active' : ''}`}>
           <li>
-            <a
-              href="#popular"
-              className={`nav-link ${activeMenu === 'best' ? 'active' : ''}`}
-              onClick={() => handleMenuClick('best')}
-            >
+            <a href="#popular" className={`nav-link ${activeMenu === 'best' ? 'active' : ''}`} onClick={() => handleMenuClick('best')}>
               Best
             </a>
           </li>
           <li>
-            <a
-              href="#snacks"
-              className={`nav-link ${activeMenu === 'makanan' ? 'active' : ''}`}
-              onClick={() => handleMenuClick('makanan')}
-            >
+            <a href="#snacks" className={`nav-link ${activeMenu === 'makanan' ? 'active' : ''}`} onClick={() => handleMenuClick('makanan')}>
               Makanan
             </a>
           </li>
           <li>
-            <a
-              href="#regular"
-              className={`nav-link ${activeMenu === 'minuman' ? 'active' : ''}`}
-              onClick={() => handleMenuClick('minuman')}
-            >
+            <a href="#regular" className={`nav-link ${activeMenu === 'minuman' ? 'active' : ''}`} onClick={() => handleMenuClick('minuman')}>
               Minuman
             </a>
           </li>

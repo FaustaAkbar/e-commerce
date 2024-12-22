@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../styles/menuPage.css';
+import '../../styles/menuPage.css';
 
 const Chatbot = () => {
   const [visible, setVisible] = useState(false);
@@ -8,11 +8,7 @@ const Chatbot = () => {
 
   return (
     <div id="chatbot-container">
-      <button 
-        id="chatbot-toggle" 
-        onClick={toggleChatbot}
-        className="floating-chat-btn"
-      >
+      <button id="chatbot-toggle" onClick={toggleChatbot} className="floating-chat-btn">
         <i className="fas fa-comments"></i>
       </button>
       {visible && (
@@ -28,12 +24,7 @@ const Chatbot = () => {
           </div>
           <div id="chatbot-messages" className="messages-container"></div>
           <div id="chatbot-input-container" className="input-container">
-            <input 
-              type="text" 
-              id="chatbot-input" 
-              className="modern-input"
-              placeholder="Tanya saya sesuatu..." 
-            />
+            <input type="text" id="chatbot-input" className="modern-input" placeholder="Tanya saya sesuatu..." />
             <button id="chatbot-send" className="send-btn">
               <i className="fas fa-paper-plane"></i>
             </button>

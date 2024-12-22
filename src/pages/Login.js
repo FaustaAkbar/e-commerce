@@ -1,8 +1,8 @@
 import React from 'react';
 import ImageSection from '../components/image';
-import FormSection from '../components/SignPage/form';
+import FormSection from '../components/LoginPage/form';
 
-function SignUp() {
+function Login() {
   return (
     <div className="h-screen flex">
       {/* Left Section */}
@@ -18,4 +18,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Login;
