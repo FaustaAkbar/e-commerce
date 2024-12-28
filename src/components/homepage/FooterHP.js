@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faLinkedin, faFacebookF, faTwitter, faDribbble } from '@fortawesome/free-brands-svg-icons';
 
-const   FooterHP = () => (
+const FooterHP = () => (
   <footer id="footer-section" className=" bg-custom-green text-gray py-8">
     <div className="max-w-screen-xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
       {/* Logo and Social Links */}

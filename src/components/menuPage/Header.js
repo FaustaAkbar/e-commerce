@@ -1,18 +1,15 @@
 import { useState } from 'react';
-import '../../styles/menuPage.css';
+
 const Header = () => {
   const [showNav, setShowNav] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeMenu, setActiveMenu] = useState('best'); // Default menu aktif
 
   const toggleNav = () => setShowNav(!showNav);
-  const toggleSearchBox = () => setShowSearch(!showSearch);
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    const searchTerm = e.target.value.toLowerCase();
-    console.log('Searching for:', searchTerm);
+    console.log('Searching for:', e.target.value.toLowerCase());
   };
 
   const handleMenuClick = (menu) => {
@@ -20,58 +17,55 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <nav className="navbar">
-        <div className="logo-container">
-          <button className="bars-icon" onClick={toggleNav}>
+    <header className="bg-white shadow-md">
+      <nav className="flex items-center justify-between px-4">
+        {/* Logo Section */}
+        <div className="flex items-center space-x-4">
+          <button className="text-gray-600 text-xl hover:text-gray-800" onClick={toggleNav}>
             <i className="fas fa-bars"></i>
           </button>
-          <a href="/">
-            <img src="/images/image.png" alt="Zek Order" className="logo-image" />
+          <a href="/homepage">
+            <img src="/images/image.png" alt="Zek Order" className="w-32 h-auto" />
           </a>
         </div>
-        <ul className={`nav-links ${showNav ? 'active' : ''}`}>
+
+        {/* Navigation Links */}
+        <ul className={`flex space-x-4 transition-all duration-300 ${showNav ? 'block' : 'hidden'} lg:flex`}>
           <li>
-            <a href="#popular" className={`nav-link ${activeMenu === 'best' ? 'active' : ''}`} onClick={() => handleMenuClick('best')}>
+            <a href="#popular" className={`px-4 py-2 rounded-md transition-colors duration-300 ${activeMenu === 'best' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-700'}`} onClick={() => handleMenuClick('best')}>
               Best
             </a>
           </li>
           <li>
-            <a href="#snacks" className={`nav-link ${activeMenu === 'makanan' ? 'active' : ''}`} onClick={() => handleMenuClick('makanan')}>
+            <a href="#snacks" className={`px-4 py-2 rounded-md transition-colors duration-300 ${activeMenu === 'makanan' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-700'}`} onClick={() => handleMenuClick('makanan')}>
               Makanan
             </a>
           </li>
           <li>
-            <a href="#regular" className={`nav-link ${activeMenu === 'minuman' ? 'active' : ''}`} onClick={() => handleMenuClick('minuman')}>
+            <a href="#regular" className={`px-4 py-2 rounded-md transition-colors duration-300 ${activeMenu === 'minuman' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-700'}`} onClick={() => handleMenuClick('minuman')}>
               Minuman
             </a>
           </li>
         </ul>
-        <div className="profile-section">
-          <div className="action-items">
-            <button className="search-btn" onClick={toggleSearchBox}>
-              <i className="fas fa-search"></i>
-            </button>
-            {showSearch && (
-              <div className="search-box">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  value={searchQuery}
-                  onChange={handleSearch}
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
-                      console.log('Executing search for:', searchQuery);
-                    }
-                  }}
-                />
-              </div>
-            )}
-          </div>
-          <img src="/images/profile.png" alt="Profile" className="profile-pic" />
+
+        {/* Searchbox */}
+        <div className="relative flex items-center">
+          <input
+            type="text"
+            placeholder="Cari menu..."
+            value={searchQuery}
+            onChange={handleSearch}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                console.log('Executing search for:', searchQuery);
+              }
+            }}
+            className="hidden lg:block px-3 py-1 border border-gray-700 rounded-md focus:ring-2 focus:ring-blue-400"
+          />
         </div>
       </nav>
     </header>
   );
 };
+
 export default Header;
