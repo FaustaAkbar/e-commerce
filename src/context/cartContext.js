@@ -1,31 +1,28 @@
+// src/context/cartContext.js
 import React, { createContext, useContext, useState } from 'react';
 
+// Membuat konteks Cart
 const CartContext = createContext();
 
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
-
-  const addToCart = (item, quantity) => {
-    if (quantity > 0) {
-      setCartItems((prevItems) => {
-        const existingItem = prevItems.find((cartItem) => cartItem.id === item.id);
-        if (existingItem) {
-          // Jika item sudah ada di keranjang, tambahkan kuantitasnya
-          return prevItems.map((cartItem) => (cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + quantity } : cartItem));
-        }
-        // Jika item belum ada di keranjang, tambahkan sebagai item baru
-        return [...prevItems, { ...item, quantity }];
-      });
-    }
-  };
-
-  const updateQuantity = (id, change) => {
-    setCartItems(
-      (prevItems) => prevItems.map((item) => (item.id === id ? { ...item, quantity: item.quantity + change } : item)).filter((item) => item.quantity > 0) // Hapus item jika kuantitasnya menjadi 0
-    );
-  };
-
-  return <CartContext.Provider value={{ cartItems, addToCart, updateQuantity }}>{children}</CartContext.Provider>;
+// Hook untuk menggunakan CartContext
+export const useCart = () => {
+  return useContext(CartContext);
 };
 
-export const useCart = () => useContext(CartContext);
+// CartProvider untuk membungkus aplikasi
+export const CartProvider = ({ children }) => {
+  // State untuk menyimpan item di dalam keranjang
+  const [cartItems, setCartItems] = useState([]);
+
+  // Fungsi untuk mendapatkan jumlah total item di keranjang
+  const getTotalItems = () => {
+    return cartItems.length; // Mengembalikan jumlah item
+  };
+
+  // Fungsi untuk menambahkan item ke keranjang
+  const addToCart = (item) => {
+    setCartItems([...cartItems, item]);
+  };
+
+  return <CartContext.Provider value={{ cartItems, getTotalItems, addToCart }}>{children}</CartContext.Provider>;
+};
