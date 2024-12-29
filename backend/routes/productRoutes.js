@@ -24,13 +24,14 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST create a new product
 router.post('/', async (req, res) => {
+  console.log('Request body received:', req.body); // Debugging
   const product = new Product(req.body);
   try {
     const newProduct = await product.save();
     res.status(201).json(newProduct);
   } catch (err) {
+    console.error('Error saving product:', err.message); // Debugging error
     res.status(400).json({ message: err.message });
   }
 });

@@ -1,7 +1,5 @@
-// adminPage.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import 'tailwindcss/tailwind.css';
 
 const AdminPage = () => {
   const [menus, setMenus] = useState([]);
@@ -10,7 +8,7 @@ const AdminPage = () => {
     itemName: '',
     description: '',
     price: '',
-    category: '',
+    category: 'Makanan', // Default value for dropdown
     imageUrl: '',
     isBest: false,
   });
@@ -20,7 +18,7 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/menus');
+        const response = await axios.get('http://localhost:5000/menu');
         setMenus(response.data);
       } catch (error) {
         console.error('Error fetching menus:', error);
@@ -32,45 +30,77 @@ const AdminPage = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setForm({ ...form, [name]: type === 'checkbox' ? checked : value });
+
+    // Update form state
+    const updatedForm = {
+      ...form,
+      [name]: type === 'checkbox' ? checked : value,
+    };
+
+    // Auto-generate image URL based on category and item name
+    if (name === 'category' || name === 'itemName') {
+      const categoryPath = updatedForm.category || 'Makanan'; // Default to 'Makanan' if empty
+      const itemNamePath = updatedForm.itemName.trim().replace(/\s+/g, '-').toLowerCase(); // Replace spaces with hyphens
+      updatedForm.imageUrl = `/images/${categoryPath.toLowerCase()}/${itemNamePath || 'people'}.png`;
+    }
+
+    setForm(updatedForm);
   };
 
   const handleCreateOrUpdate = async () => {
+    if (!form.itemName || !form.description || !form.price || !form.category || !form.imageUrl) {
+      alert('All fields are required except Best Menu Item');
+      return;
+    }
+
     try {
-      if (isEditing) {
-        await axios.put(`http://localhost:5000/api/menus/${form._id}`, form);
-      } else {
-        await axios.post('http://localhost:5000/api/menus', form);
+      const dataToSend = { ...form };
+
+      if (!isEditing) {
+        delete dataToSend._id;
       }
-      const response = await axios.get('http://localhost:5000/api/menus');
+
+      if (isEditing) {
+        await axios.put(`http://localhost:5000/menu/${form._id}`, dataToSend);
+        alert('Menu updated successfully!');
+      } else {
+        await axios.post('http://localhost:5000/menu', dataToSend);
+        alert('Menu created successfully!');
+      }
+
+      const response = await axios.get('http://localhost:5000/menu');
       setMenus(response.data);
+
       setForm({
         _id: '',
         itemName: '',
         description: '',
         price: '',
-        category: '',
+        category: 'Makanan',
         imageUrl: '',
         isBest: false,
       });
       setIsEditing(false);
     } catch (error) {
-      console.error('Error saving menu:', error);
+      console.error('Error saving menu:', error.response?.data || error.message);
+      alert('Failed to save menu. Please try again.');
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/menu/${id}`);
+      setMenus(menus.filter((menu) => menu._id !== id));
+      alert('Menu deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting menu:', error);
+      alert('Failed to delete menu. Please try again.');
     }
   };
 
   const handleEdit = (menu) => {
     setForm(menu);
     setIsEditing(true);
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:5000/api/menus/${id}`);
-      setMenus(menus.filter((menu) => menu._id !== id));
-    } catch (error) {
-      console.error('Error deleting menu:', error);
-    }
   };
 
   return (
@@ -89,8 +119,11 @@ const AdminPage = () => {
           <input type="text" name="itemName" value={form.itemName} onChange={handleInputChange} placeholder="Item Name" className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
           <textarea name="description" value={form.description} onChange={handleInputChange} placeholder="Description" className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
           <input type="number" name="price" value={form.price} onChange={handleInputChange} placeholder="Price" className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          <input type="text" name="category" value={form.category} onChange={handleInputChange} placeholder="Category" className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          <input type="text" name="imageUrl" value={form.imageUrl} onChange={handleInputChange} placeholder="Image URL" className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <select name="category" value={form.category} onChange={handleInputChange} className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="Makanan">Makanan</option>
+            <option value="Minuman">Minuman</option>
+          </select>
+          <input type="text" name="imageUrl" value={form.imageUrl} onChange={handleInputChange} placeholder="Image URL" readOnly className="border p-3 rounded bg-gray-100 focus:outline-none" />
           <label className="flex items-center">
             <input type="checkbox" name="isBest" checked={form.isBest} onChange={handleInputChange} className="mr-2 h-5 w-5 text-blue-500 focus:ring-blue-500 border-gray-300 rounded" />
             Best Menu Item

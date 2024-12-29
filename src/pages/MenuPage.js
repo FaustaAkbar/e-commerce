@@ -3,6 +3,7 @@ import Card from '../components/menuPage/Card';
 import Header from '../components/menuPage/Header';
 import Footer from '../components/menuPage/Footer';
 import Chatbot from '../components/menuPage/Chatbot';
+
 const MenuPage = () => {
   const [favoriteDishes, setFavoriteDishes] = useState([]);
   const [snackDishes, setSnackDishes] = useState([]);
