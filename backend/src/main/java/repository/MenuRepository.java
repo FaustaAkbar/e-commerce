@@ -1,7 +1,8 @@
-package com.example.backend.repository;
+package repository;
 
-import com.example.backend.model.MenuItem;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import model.MenuItem;
 
 public interface MenuRepository extends MongoRepository<MenuItem, String> {
 }
