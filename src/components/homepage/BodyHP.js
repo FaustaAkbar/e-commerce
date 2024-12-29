@@ -2,26 +2,24 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const BodyHP = () => {
-  const [topDishes, setTopDishes] = useState([]);
+  const [bestDishes, setBestDishes] = useState([]);
 
   useEffect(() => {
-    const fetchTopDishes = async () => {
+    const fetchBestDishes = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/menu/');
+        const response = await fetch('http://localhost:5000/menu');
         const data = await response.json();
 
-        const filteredDishes = data
-          .filter((item) => item.rating >= 4.8)
-          .sort((a, b) => b.rating - a.rating)
-          .slice(0, 3);
+        // Filter dishes based on isBest property and limit to 3
+        const filteredDishes = data.filter((item) => item.isBest).slice(0, 3);
 
-        setTopDishes(filteredDishes);
+        setBestDishes(filteredDishes);
       } catch (error) {
         console.error('Error fetching dishes:', error);
       }
     };
 
-    fetchTopDishes();
+    fetchBestDishes();
   }, []);
 
   return (
@@ -76,18 +74,20 @@ const BodyHP = () => {
           <p className="text-gray-600 mt-5">Ini bukan hanya tentang makanan lezat, ini adalah pengalaman.</p>
         </div>
         <div className="dish-items grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {topDishes.length > 0 ? (
-            topDishes.map((dish) => (
+          {bestDishes.length > 0 ? (
+            bestDishes.map((dish) => (
               <div key={dish._id} className="dish-card border p-4 rounded-lg text-center">
-                <img src={dish.image} alt={dish.name} className="w-32 h-32 mx-auto mb-3 rounded-full" />
-                <h4 className="text-lg font-semibold">{dish.name}</h4>
-                <a href={`/checkout/${dish._id}`} className="text-green-600 mt-2 inline-block">
+                <img src={dish.imageUrl} alt={dish.itemName} className="w-32 h-32 mx-auto mb-3 rounded-full" />
+                <h4 className="text-lg font-semibold">{dish.itemName}</h4>
+                <p className="text-gray-500">{dish.description}</p>
+                <p className="text-green-600 font-bold">Rp {dish.price.toLocaleString()}</p>
+                <a href={`/MenuPage`} className="text-green-600 mt-2 inline-block">
                   Order Now &gt;
                 </a>
               </div>
             ))
           ) : (
-            <p className="text-center col-span-full">No dishes available at the moment.</p>
+            <p className="text-center col-span-full">No best dishes available at the moment.</p>
           )}
         </div>
         <div className="text-center mt-6">
