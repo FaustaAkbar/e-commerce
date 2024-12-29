@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import { useCart } from '../../context/cartContext'; // Impor useCart
+import { useCart } from '../../context/cartContext';
 
 const Card = ({ item }) => {
   const [quantity, setQuantity] = useState(0);
-  const { addToCart } = useCart(); // Destructuring addToCart dari useCart
+  const { addToCart } = useCart();
 
   const handleDecrease = () => {
     if (quantity > 0) {
@@ -18,9 +18,9 @@ const Card = ({ item }) => {
 
   const handleAddToCart = () => {
     if (quantity > 0) {
-      addToCart(item, quantity); // Menggunakan fungsi addToCart dari CartContext
+      addToCart(item, quantity);
       alert(`Added ${quantity} ${item.itemName}(s) to cart\nTotal: Rp.${item.price * quantity}`);
-      setQuantity(0); // Mengatur ulang kuantitas setelah menambahkan ke keranjang
+      setQuantity(0); // Reset quantity after adding to cart
     } else {
       alert('Please select quantity first');
     }
