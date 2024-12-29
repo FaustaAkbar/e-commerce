@@ -1,24 +1,33 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
-import { auth } from '../../service/firebaseConfig'; // Pastikan untuk mengimpor Firebase Auth
+import { auth } from '../../service/firebaseConfig'; // Ensure you are importing Firebase Auth
 import SocialLoginButton from '../button';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [userData, setUserData] = useState(null); // State untuk menyimpan data pengguna
+  const [userData, setUserData] = useState(null); // State for user data
   const navigate = useNavigate();
 
-  // Fungsi login email password
+  // Login function
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      const user = auth.currentUser;
+      // Perform Firebase login with email and password
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-      // Jika displayName dan photoURL kosong, update profil pengguna
+      // Check if the user is the admin
+      if (email === 'admin@gmail.com' && password === 'admin123') {
+        navigate('/admin'); // Redirect to /admin if admin credentials match
+      } else {
+        // If user is not admin, navigate to the homepage
+        navigate('/HomePage', { replace: true });
+      }
+
+      // If displayName or photoURL is empty, update user profile
       if (!user.displayName || !user.photoURL) {
         await updateProfile(user, {
           displayName: 'Zeks',
@@ -26,7 +35,7 @@ const Login = () => {
         });
       }
 
-      // Menyimpan data pengguna ke localStorage
+      // Save user data to localStorage
       localStorage.setItem(
         'user',
         JSON.stringify({
@@ -35,18 +44,17 @@ const Login = () => {
         })
       );
 
+      // Set the user data in state
       setUserData({
         displayName: user.displayName,
         photoURL: user.photoURL,
       });
-
-      navigate('/HomePage', { replace: true });
     } catch (err) {
       setError('Invalid credentials. Please check your email and password.');
     }
   };
 
-  // Fungsi untuk login dengan Google
+  // Google login
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
@@ -56,13 +64,13 @@ const Login = () => {
         displayName: user.displayName,
         photoURL: user.photoURL,
       });
-      navigate('/HomePage', { replace: true }); // Redirect ke halaman home
+      navigate('/HomePage', { replace: true });
     } catch (err) {
       setError('Google login failed. Please try again.');
     }
   };
 
-  // Fungsi untuk login dengan Facebook
+  // Facebook login
   const handleFacebookLogin = async () => {
     const provider = new FacebookAuthProvider();
     try {
@@ -72,7 +80,7 @@ const Login = () => {
         displayName: user.displayName,
         photoURL: user.photoURL,
       });
-      navigate('/HomePage', { replace: true }); // Redirect ke halaman home
+      navigate('/HomePage', { replace: true });
     } catch (err) {
       console.error('Facebook login error:', err);
       setError('Facebook login failed. Please try again.');
@@ -86,19 +94,19 @@ const Login = () => {
       </div>
       <h2 className="text-2xl font-sans font-bold text-gray-800 mb-6 self-start ">Login to your account!</h2>
 
-      {/* Social Buttons */}
+      {/* Social Login Buttons */}
       <div className="p-5 flex justify-between w-full space-x-4">
         <SocialLoginButton
           className="bg-red-600 hover:bg-red-700 text-white"
           platform="Google"
           iconSrc="/images/google.png"
-          onClick={handleGoogleLogin} // Hubungkan dengan fungsi Google
+          onClick={handleGoogleLogin} // Google login function
         />
         <SocialLoginButton
           className="bg-blue-600 hover:bg-blue-700 text-white"
           platform="Facebook"
           iconSrc="/images/facebook.png"
-          onClick={handleFacebookLogin} // Hubungkan dengan fungsi Facebook
+          onClick={handleFacebookLogin} // Facebook login function
         />
       </div>
 
@@ -126,7 +134,7 @@ const Login = () => {
             required
           />
         </div>
-        {error && <p className="text-red-500 text-sm">{error}</p>} {/* Tampilkan error jika ada */}
+        {error && <p className="text-red-500 text-sm">{error}</p>} {/* Show error message */}
         <button type="submit" className="w-full py-2 px-4 bg-green-600 text-white rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
           Login
         </button>
@@ -140,7 +148,7 @@ const Login = () => {
         </Link>
       </p>
 
-      {/* Menampilkan data pengguna setelah login */}
+      {/* Display user data after login */}
       {userData && (
         <div className="mt-8 flex items-center">
           <img src={userData.photoURL} alt="Profile" className="w-10 h-10 rounded-full mr-4" />
