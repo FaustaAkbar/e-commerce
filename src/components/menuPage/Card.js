@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { useCart } from '../../context/cartContext';
 
@@ -20,7 +19,7 @@ const Card = ({ item }) => {
     if (quantity > 0) {
       addToCart(item, quantity);
       alert(`Added ${quantity} ${item.itemName}(s) to cart\nTotal: Rp.${item.price * quantity}`);
-      setQuantity(0); // Reset quantity after adding to cart
+      setQuantity(0);
     } else {
       alert('Please select quantity first');
     }
@@ -35,13 +34,9 @@ const Card = ({ item }) => {
         <h3 className="text-lg font-semibold mb-2">{item.itemName}</h3>
         <p className="price text-lg font-bold text-gray-800 mb-4">Rp.{item.price}</p>
         <div className="quantity-control flex justify-center items-center gap-4 mb-4">
-          <button className="quantity-btn bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center" onClick={handleDecrease}>
-            -
-          </button>
+          <button className="quantity-btn bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center" onClick={handleDecrease}>-</button>
           <span className="quantity text-lg">{quantity}</span>
-          <button className="quantity-btn bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center" onClick={handleIncrease}>
-            +
-          </button>
+          <button className="quantity-btn bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center" onClick={handleIncrease}>+</button>
         </div>
         <button className="add-to-cart bg-green-500 text-white py-2 px-4 rounded-lg w-full font-semibold transition-colors duration-200 hover:bg-green-600" onClick={handleAddToCart}>
           Add to Cart

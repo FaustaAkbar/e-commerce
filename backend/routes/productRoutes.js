@@ -3,10 +3,13 @@ const Product = require('../models/product');
 
 const router = express.Router();
 
-// GET all products
+// GET all products or search products based on query
 router.get('/', async (req, res) => {
+  const searchQuery = req.query.search || '';
   try {
-    const products = await Product.find();
+    const products = await Product.find({
+      itemName: { $regex: searchQuery, $options: 'i' } // Case-insensitive search
+    });
     res.json(products);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -24,14 +27,13 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// POST a new product
 router.post('/', async (req, res) => {
-  console.log('Request body received:', req.body); // Debugging
   const product = new Product(req.body);
   try {
     const newProduct = await product.save();
     res.status(201).json(newProduct);
   } catch (err) {
-    console.error('Error saving product:', err.message); // Debugging error
     res.status(400).json({ message: err.message });
   }
 });

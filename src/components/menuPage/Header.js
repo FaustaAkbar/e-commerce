@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Header = () => {
+const Header = ({ onSearch }) => {
   const [showNav, setShowNav] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeMenu, setActiveMenu] = useState('best'); // Default menu aktif
@@ -8,8 +8,9 @@ const Header = () => {
   const toggleNav = () => setShowNav(!showNav);
 
   const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-    console.log('Searching for:', e.target.value.toLowerCase());
+    const query = e.target.value;
+    setSearchQuery(query);
+    onSearch(query); // Pass search query to parent component to handle search
   };
 
   const handleMenuClick = (menu) => {
@@ -32,17 +33,29 @@ const Header = () => {
         {/* Navigation Links */}
         <ul className={`flex space-x-4 transition-all duration-300 ${showNav ? 'block' : 'hidden'} lg:flex`}>
           <li>
-            <a href="#popular" className={`px-4 py-2 rounded-md transition-colors duration-300 ${activeMenu === 'best' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-700'}`} onClick={() => handleMenuClick('best')}>
+            <a
+              href="#popular"
+              className={`px-4 py-2 rounded-md transition-colors duration-300 ${activeMenu === 'best' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-700'}`}
+              onClick={() => handleMenuClick('best')}
+            >
               Best
             </a>
           </li>
           <li>
-            <a href="#snacks" className={`px-4 py-2 rounded-md transition-colors duration-300 ${activeMenu === 'makanan' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-700'}`} onClick={() => handleMenuClick('makanan')}>
+            <a
+              href="#snacks"
+              className={`px-4 py-2 rounded-md transition-colors duration-300 ${activeMenu === 'makanan' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-700'}`}
+              onClick={() => handleMenuClick('makanan')}
+            >
               Makanan
             </a>
           </li>
           <li>
-            <a href="#regular" className={`px-4 py-2 rounded-md transition-colors duration-300 ${activeMenu === 'minuman' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-700'}`} onClick={() => handleMenuClick('minuman')}>
+            <a
+              href="#regular"
+              className={`px-4 py-2 rounded-md transition-colors duration-300 ${activeMenu === 'minuman' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-700'}`}
+              onClick={() => handleMenuClick('minuman')}
+            >
               Minuman
             </a>
           </li>
@@ -54,7 +67,7 @@ const Header = () => {
             type="text"
             placeholder="Cari menu..."
             value={searchQuery}
-            onChange={handleSearch}
+            onChange={handleSearch} // Update search query state on input change
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
                 console.log('Executing search for:', searchQuery);
